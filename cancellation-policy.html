@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cancellation Policy — Apna Travel Guru</title>
+<meta name="robots" content="index, follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css" />
+<style>
+  .legal-wrap { max-width: 760px; margin: 0 auto; padding: 140px 20px 80px; }
+  .legal-wrap h1 { font-family: var(--font-display); color: var(--color-navy); font-size: 32px; margin-bottom: 18px; }
+  .legal-wrap h2 { font-family: var(--font-display); color: var(--color-navy); font-size: 20px; margin: 32px 0 10px; }
+  .legal-wrap p, .legal-wrap li { color: var(--color-slate); font-size: 15px; margin-bottom: 10px; }
+  .legal-wrap ul { padding-left: 20px; list-style: disc; }
+  .legal-note { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-md); padding: 16px 18px; font-size: 13.5px; color: var(--color-navy); margin-bottom: 30px; }
+  .back-link { display: inline-block; margin-bottom: 20px; font-size: 14px; font-weight: 600; color: var(--color-marigold); }
+  table { width: 100%; border-collapse: collapse; margin: 14px 0 22px; font-size: 14px; }
+  th, td { text-align: left; padding: 10px 12px; border: 1px solid var(--color-line); color: var(--color-slate); }
+  th { background: var(--color-surface); color: var(--color-navy); }
+</style>
+</head>
+<body>
+<div class="legal-wrap">
+  <a href="index.html" class="back-link">← Back to Apna Travel Guru</a>
+  <h1>Cancellation Policy</h1>
+  <div class="legal-note">
+    <strong>Editable draft.</strong> Update the cutoffs and percentages below to match your real vendor cancellation terms.
+  </div>
+
+  <p>Last updated: <span id="dateStamp"></span></p>
+
+  <h2>1. Cancellation Charges</h2>
+  <table>
+    <tr><th>Time Before Departure</th><th>Cancellation Charge</th></tr>
+    <tr><td>15+ days</td><td>Advance amount only</td></tr>
+    <tr><td>7–14 days</td><td>50% of total package cost</td></tr>
+    <tr><td>Less than 7 days</td><td>100% of total package cost</td></tr>
+  </table>
+
+  <h2>2. No-Shows</h2>
+  <p>Travelers who do not show up at the departure point without prior notice will not be eligible for any refund.</p>
+
+  <h2>3. Rescheduling</h2>
+  <p>One free rescheduling is allowed if requested at least 7 days before departure, subject to hotel and transport availability.</p>
+
+  <h2>4. Force Majeure</h2>
+  <p>In case of cancellations due to natural disasters, government restrictions, or events beyond our control, we will work with vendors to offer the best possible resolution — rescheduling where possible, or a partial refund where not.</p>
+</div>
+<script src="js/data.js"></script>
+<script>
+  document.getElementById("dateStamp").textContent = new Date().toLocaleDateString("en-IN", { year: "numeric", month: "long", day: "numeric" });
+</script>
+</body>
+</html>
