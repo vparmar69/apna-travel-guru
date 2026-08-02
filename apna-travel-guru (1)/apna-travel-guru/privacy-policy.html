@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Privacy Policy — Apna Travel Guru</title>
+<meta name="robots" content="index, follow" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css" />
+<style>
+  .legal-wrap { max-width: 760px; margin: 0 auto; padding: 140px 20px 80px; }
+  .legal-wrap h1 { font-family: var(--font-display); color: var(--color-navy); font-size: 32px; margin-bottom: 18px; }
+  .legal-wrap h2 { font-family: var(--font-display); color: var(--color-navy); font-size: 20px; margin: 32px 0 10px; }
+  .legal-wrap p, .legal-wrap li { color: var(--color-slate); font-size: 15px; margin-bottom: 10px; }
+  .legal-wrap ul { padding-left: 20px; list-style: disc; }
+  .legal-note { background: var(--color-surface); border: 1px solid var(--color-line); border-radius: var(--radius-md); padding: 16px 18px; font-size: 13.5px; color: var(--color-navy); margin-bottom: 30px; }
+  .back-link { display: inline-block; margin-bottom: 20px; font-size: 14px; font-weight: 600; color: var(--color-marigold); }
+</style>
+</head>
+<body>
+<div class="legal-wrap">
+  <a href="index.html" class="back-link">← Back to Apna Travel Guru</a>
+  <h1>Privacy Policy</h1>
+  <div class="legal-note">
+    <strong>Editable draft.</strong> This is placeholder text to get you started — have it reviewed before publishing, since privacy law requirements vary by state/country and by exactly what data you collect (e.g. WhatsApp numbers, payment details).
+  </div>
+
+  <p>Last updated: <span id="dateStamp"></span></p>
+
+  <h2>1. Information We Collect</h2>
+  <p>When you contact Apna Travel Guru through our website, WhatsApp, phone, or social media, we may collect your name, phone number, email address, and travel preferences in order to plan and confirm your booking.</p>
+
+  <h2>2. How We Use Your Information</h2>
+  <ul>
+    <li>To respond to booking enquiries and confirm tour packages</li>
+    <li>To coordinate hotel, transport, and itinerary arrangements</li>
+    <li>To send booking updates and travel information via WhatsApp, call, or email</li>
+  </ul>
+
+  <h2>3. Information Sharing</h2>
+  <p>We do not sell your personal information. We may share necessary details (such as your name and travel dates) with hotels and transport partners solely to fulfil your booking.</p>
+
+  <h2>4. Data Security</h2>
+  <p>We take reasonable steps to protect the information you share with us, but no method of transmission over the internet or WhatsApp is 100% secure.</p>
+
+  <h2>5. Contact Us</h2>
+  <p>For any privacy-related questions, reach us at <span id="emailStamp"></span>.</p>
+</div>
+<script src="js/data.js"></script>
+<script>
+  document.getElementById("dateStamp").textContent = new Date().toLocaleDateString("en-IN", { year: "numeric", month: "long", day: "numeric" });
+  document.getElementById("emailStamp").textContent = SITE_CONFIG.email;
+</script>
+</body>
+</html>
