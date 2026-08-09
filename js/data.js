@@ -27,9 +27,9 @@ const SITE_CONFIG = {
   tagline: "Trusted Travel Partner for Spiritual & Cultural Journeys",
 
   // Include country code, no + sign, no spaces. Example shown is a placeholder.
-  whatsappNumber: "919876543210",
-  callNumber: "+919876543210",
-  email: "hello@apnatravelguru.com",
+  whatsappNumber: "7470471789",
+  callNumber: "+917470471789",
+  email: "apnatravelguruu@gmail.com",
 
   // Pre-filled message sent when someone taps a WhatsApp button
   whatsappDefaultMessage: "Hi Apna Travel Guru! I'd like to know more about your tour packages.",
@@ -41,8 +41,8 @@ const SITE_CONFIG = {
   googleMapsEmbedUrl: "https://www.google.com/maps?q=Indore,Madhya+Pradesh&output=embed",
 
   social: {
-    youtube: "https://youtube.com/@apnatravelguru",
-    instagram: "https://instagram.com/apnatravelguru",
+    youtube: "https://youtube.com/shorts/q2qS5BPUbWg?si=66SEy-YX2Z_bZCYe",
+    instagram: "https://youtube.com/shorts/q2qS5BPUbWg?si=66SEy-YX2Z_bZCYe",
     facebook: "https://facebook.com/apnatravelguru",
   },
 
@@ -74,7 +74,7 @@ const PACKAGES = [
     duration: "2 Days / 2 Nights",
     group: "4 Persons",
     startingPrice: 2469,
-    youtubeReelUrl: "https://youtube.com/shorts/REPLACE_WITH_REEL_ID",
+    youtubeReelUrl: "https://youtube.com/shorts/q2qS5BPUbWg?si=66SEy-YX2Z_bZCYe",
     instagramReelUrl: "https://instagram.com/reel/REPLACE_WITH_REEL_ID",
     youtubeThumbnail: "images/packages/ujjain-yt-thumb.jpg",
     instagramThumbnail: "images/packages/ujjain-ig-thumb.jpg",
