@@ -32,7 +32,7 @@ const SITE_CONFIG = {
   email: "apnatravelguruu@gmail.com",
 
   // Pre-filled message sent when someone taps a WhatsApp button
-  whatsappDefaultMessage: "Hi Apna Travel Guru! I'd like to know more about your tour packages.",
+  whatsappDefaultMessage: "Hi Apna Travel Guru! I'd like to know more about your tour packagess.",
 
   officeHours: "Mon – Sun: 9:00 AM – 8:00 PM",
   officeAddress: "Indore, Madhya Pradesh, India",
