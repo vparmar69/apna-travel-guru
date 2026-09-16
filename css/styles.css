@@ -216,17 +216,14 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   color: var(--color-navy);
 }
 .brand-mark {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
-  background: var(--color-navy);
-  color: var(--color-marigold-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 17px;
+  height: 40px;       /* Logo ki height fix */
+  width: auto;        /* Width automatically adjust */
+  display: inline-block;
+}
+.brand-mark img {
+  height: 100%;
+  width: auto;
+  display: block;
 }
 
 .nav-desktop {
