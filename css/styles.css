@@ -226,6 +226,19 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   display: block;
 }
 
+.brand-logo {
+  height: 40px;       /* Desktop par logo ki height */
+  width: auto;        /* Width automatically adjust ho jaayegi */
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+@media (max-width: 768px) {
+  .brand-logo {
+    height: 28px;     /* Mobile par chhota size */
+  }
+}
+
 .nav-desktop {
   display: none;
   gap: 32px;
