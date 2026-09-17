@@ -263,7 +263,10 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   align-items: flex-end;
   padding-top: var(--header-h);
   overflow: hidden;
-  background: linear-gradient(160deg, var(--color-navy) 0%, #1c3f63 55%, var(--color-navy-dark) 100%);
+  background-image: url("images/hero/hero-background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .hero-media {
