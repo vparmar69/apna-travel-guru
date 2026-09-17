@@ -263,11 +263,12 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   align-items: flex-end;
   padding-top: var(--header-h);
   overflow: hidden;
-  background-image: url("images/hero/hero-background.jpg");
+  background-image: url("images/hero/hero-background.jpg"); /* apni image ka path */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
+
 @media (max-width: 768px) {
   .hero {
     background-position: top;
