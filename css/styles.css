@@ -927,6 +927,29 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .nav-drawer a { padding: 12px 4px; font-size: 15px; font-weight: 500; border-bottom: 1px solid var(--color-line); }
 
 /* ---------------------------------------------------------------------
+   MOBILE HERO FIXES
+   --------------------------------------------------------------------- */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 24px;   /* mobile par heading chhoti */
+    line-height: 1.2;
+  }
+  .hero p {
+    font-size: 14px;   /* tagline bhi chhoti */
+  }
+  .hero-ctas {
+    flex-direction: row;   /* ek line mein */
+    flex-wrap: nowrap;     /* wrap na ho */
+    gap: 6px;              /* chhota gap */
+  }
+  .hero-ctas .btn {
+    flex: 1;               /* sab buttons equal width */
+    font-size: 13px;       /* text chhota */
+    padding: 10px;         /* chhota padding */
+  }
+}
+
+/* ---------------------------------------------------------------------
    UTILITIES
    --------------------------------------------------------------------- */
 .visually-hidden {
