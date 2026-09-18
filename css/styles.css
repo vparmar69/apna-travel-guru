@@ -950,6 +950,47 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 }
 
 /* ---------------------------------------------------------------------
+   SEARCH SECTION
+   --------------------------------------------------------------------- */
+.search-section {
+  background: #000; /* black background */
+  color: #fff;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.search-heading {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: var(--color-marigold-light); /* yellowish heading */
+}
+
+.search-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.search-bar input,
+.search-bar select {
+  padding: 12px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+  flex: 1;
+  min-width: 180px;
+}
+
+.search-bar button {
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+/* ---------------------------------------------------------------------
    UTILITIES
    --------------------------------------------------------------------- */
 .visually-hidden {
