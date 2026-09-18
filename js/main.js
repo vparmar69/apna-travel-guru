@@ -353,17 +353,17 @@
   // Init
   // ---------------------------------------------------------------
   function init() {
-    initNav();
-    initContactLinks();
-    renderTrustStrip();
-    renderAboutStats();
-    renderPackageGrid();
-    renderReviews();
-    renderSocialBand();
-    renderContactList();
-    initModalDismiss();
-    $("#year").textContent = new Date().getFullYear();
-  }
+  initNav();
+  initContactLinks();
+  renderTrustStrip();
+  // renderAboutStats();   <-- ❌ is line ko comment kar diya
+  renderPackageGrid();
+  renderReviews();
+  renderSocialBand();
+  renderContactList();
+  initModalDismiss();
+  $("#year").textContent = new Date().getFullYear();
+}
 
   document.addEventListener("DOMContentLoaded", init);
 })();
