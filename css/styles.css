@@ -1052,58 +1052,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   color: #FFD700;
 }
 
-/* === Global Black Background + Yellow Text === */
-body {
-  background-color: #000;   /* pura background black */
-  color: #FFD700;           /* default text yellow */
-}
-
-/* Headings yellow */
-h1, h2, h3, h4, h5, h6 {
-  color: #FFD700;
-}
-
-/* Section backgrounds black */
-.section {
-  background-color: #000;
-  color: #FFD700;
-}
-
-/* Buttons */
-.btn {
-  border: 1px solid #FFD700;
-}
-
-/* WhatsApp button yellow background + black text */
-.btn.btn--whatsapp {
-  background-color: #FFD700;
-  color: #000;
-}
-
-/* Navy button black background + yellow text */
-.btn.btn--navy {
-  background-color: #000;
-  color: #FFD700;
-}
-
-/* Footer black + yellow */
-footer {
-  background-color: #000;
-  color: #FFD700;
-}
-
-/* Contact rows */
-.contact-row {
-  color: #FFD700;
-}
-
-/* Review cards */
-.review-card {
-  background-color: #000;
-  color: #FFD700;
-  border: 1px solid #FFD700;
-}
-
 
 /* ---------------------------------------------------------------------
    UTILITIES
