@@ -960,8 +960,8 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 
 .search-heading {
   font-family: var(--font-display);
-  font-size: 26px;
-  font-weight: 600;
+  font-size: 28px;
+  font-weight: 700;
   margin-bottom: 24px;
   color: var(--color-marigold-light); /* yellow heading */
 }
@@ -969,7 +969,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 .search-bar {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
   justify-content: center;
 }
 
@@ -987,7 +987,10 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   padding: 12px 20px;
   border-radius: 6px;
   font-size: 14px;
+  background: var(--color-marigold); /* orange reset button */
+  color: #fff;
 }
+
 
 /* ---------------------------------------------------------------------
    UTILITIES
