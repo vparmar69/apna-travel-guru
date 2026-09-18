@@ -990,6 +990,32 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   background: var(--color-marigold); /* orange reset button */
   color: #fff;
 }
+/* === Custom changes for Search Section === */
+.search-section {
+  background-color: #000;   /* black background */
+  color: #FFD700;           /* yellow text */
+  padding: 40px 0;
+}
+
+.search-section .search-heading {
+  color: #FFD700;           /* yellow heading */
+}
+
+.search-section .search-bar input,
+.search-section .search-bar select {
+  background-color: #222;   /* dark background for fields */
+  color: #FFD700;           /* yellow text inside fields */
+  border: 1px solid #FFD700;
+  padding: 8px;
+}
+
+.search-section .btn.btn--primary {
+  background-color: #FFD700; /* yellow button */
+  color: #000;               /* black text */
+  border: none;
+  padding: 8px 16px;
+  font-weight: bold;
+}
 
 
 /* ---------------------------------------------------------------------
