@@ -1017,6 +1017,41 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   font-weight: bold;
 }
 
+/* === Custom changes for Package Cards === */
+.package-card {
+  background-color: #000;   /* black background */
+  color: #FFD700;           /* yellow text */
+  border: 1px solid #FFD700;
+}
+
+/* Package title + subtitle yellow */
+.package-card h3,
+.package-card .subtitle {
+  color: #FFD700;
+}
+
+/* Meta info (duration, group) yellow */
+.package-card .package-meta span {
+  color: #FFD700;
+}
+
+/* Buttons inside package cards */
+.package-card .btn {
+  border: 1px solid #FFD700;
+}
+
+/* WhatsApp button yellow background */
+.package-card .btn.btn--whatsapp {
+  background-color: #FFD700;
+  color: #000;
+}
+
+/* Navy button black background + yellow text */
+.package-card .btn.btn--navy {
+  background-color: #000;
+  color: #FFD700;
+}
+
 
 /* ---------------------------------------------------------------------
    UTILITIES
