@@ -1052,6 +1052,49 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   color: #FFD700;
 }
 
+/* === Global Black Background + Yellow Text === */
+html, body {
+  background-color: #000;   /* pura page black */
+  color: #FFD700;           /* default text yellow */
+  height: 100%;             /* ensure full coverage */
+  margin: 0;
+  padding: 0;
+}
+
+/* All sections black background */
+.section {
+  background-color: #000;
+  color: #FFD700;
+}
+
+/* Headings yellow */
+h1, h2, h3, h4, h5, h6 {
+  color: #FFD700;
+}
+
+/* Package section black */
+#packages {
+  background-color: #000;
+  color: #FFD700;
+}
+
+/* Reviews section black */
+#reviews {
+  background-color: #000;
+  color: #FFD700;
+}
+
+/* Contact section black */
+#contact {
+  background-color: #000;
+  color: #FFD700;
+}
+
+/* Footer black */
+footer {
+  background-color: #000;
+  color: #FFD700;
+}
 
 /* ---------------------------------------------------------------------
    UTILITIES
