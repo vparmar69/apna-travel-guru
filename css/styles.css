@@ -948,7 +948,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     padding: 10px;         /* chhota padding */
   }
 }
-
 /* ---------------------------------------------------------------------
    SEARCH SECTION
    --------------------------------------------------------------------- */
@@ -964,7 +963,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   font-size: 26px;
   font-weight: 600;
   margin-bottom: 24px;
-  color: var(--color-marigold-light); /* yellowish heading */
+  color: var(--color-marigold-light); /* yellow heading */
 }
 
 .search-bar {
