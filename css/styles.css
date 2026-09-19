@@ -1062,6 +1062,34 @@ footer {
   color: #FFD700;
 }
 
+/* Big search bar styling */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-bar .search-icon {
+  color: #FFD700;   /* yellow icon */
+  font-size: 24px;
+}
+
+#searchInput {
+  flex: 1;
+  padding: 12px 16px;
+  font-size: 18px;        /* bigger size */
+  background-color: #000; /* black background */
+  color: #FFD700;         /* yellow text */
+  border: 1px solid #FFD700;
+}
+
+#resetBtn {
+  background-color: #FFD700;
+  color: #000;
+  font-weight: bold;
+  padding: 12px 20px;
+}
+
 /* ---------------------------------------------------------------------
    UTILITIES
    --------------------------------------------------------------------- */
