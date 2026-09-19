@@ -364,33 +364,29 @@
   initModalDismiss();
   $("#year").textContent = new Date().getFullYear();
 }
+// 🔍 Search + Reset functionality
+    const searchInput = document.getElementById("searchInput");
+    const resetBtn = document.getElementById("resetBtn");
 
-})();
+    if (searchInput && resetBtn) {
+      searchInput.addEventListener("input", () => {
+        const query = searchInput.value.toLowerCase();
+        const cards = document.querySelectorAll(".package-card");
+
+        cards.forEach(card => {
+          const title = card.querySelector("h3").textContent.toLowerCase();
+          card.style.display = title.includes(query) ? "block" : "none";
+        });
+      });
+
+      resetBtn.addEventListener("click", () => {
+        searchInput.value = "";
+        const cards = document.querySelectorAll(".package-card");
+        cards.forEach(card => card.style.display = "block");
+      });
+    }
+  }
+
   document.addEventListener("DOMContentLoaded", init);
 
-   document.addEventListener("DOMContentLoaded", () => {
-  const searchInput = document.getElementById("searchInput");
-  const resetBtn = document.getElementById("resetBtn");
-
-  // 🔍 Search filter
-  searchInput.addEventListener("input", () => {
-    const query = searchInput.value.toLowerCase();
-    const cards = document.querySelectorAll(".package-card");
-
-    cards.forEach(card => {
-      const title = card.querySelector("h3").textContent.toLowerCase();
-      if (title.includes(query)) {
-        card.style.display = "block";   // show matching package
-      } else {
-        card.style.display = "none";    // hide non-matching
-      }
-    });
-  });
-
-  // ⏳ Reset clears input + shows all packages
-  resetBtn.addEventListener("click", () => {
-    searchInput.value = "";
-    const cards = document.querySelectorAll(".package-card");
-    cards.forEach(card => card.style.display = "block");
-  });
-});
+})();   // IIFE close
