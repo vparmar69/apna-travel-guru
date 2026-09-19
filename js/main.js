@@ -365,6 +365,7 @@
   $("#year").textContent = new Date().getFullYear();
 }
 
+})();
   document.addEventListener("DOMContentLoaded", init);
 
    document.addEventListener("DOMContentLoaded", () => {
@@ -393,5 +394,3 @@
     cards.forEach(card => card.style.display = "block");
   });
 });
-
-})();
