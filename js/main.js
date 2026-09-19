@@ -352,41 +352,39 @@
   // ---------------------------------------------------------------
   // Init
   // ---------------------------------------------------------------
-  function init() {
+ function init() {
   initNav();
   initContactLinks();
   renderTrustStrip();
-  // renderAboutStats();   <-- ❌ is line ko comment kar diya
+  // renderAboutStats();   // comment kiya hai
   renderPackageGrid();
   renderReviews();
   renderSocialBand();
   renderContactList();
   initModalDismiss();
   $("#year").textContent = new Date().getFullYear();
-}
-// 🔍 Search + Reset functionality
-    const searchInput = document.getElementById("searchInput");
-    const resetBtn = document.getElementById("resetBtn");
 
-    if (searchInput && resetBtn) {
-      searchInput.addEventListener("input", () => {
-        const query = searchInput.value.toLowerCase();
-        const cards = document.querySelectorAll(".package-card");
+  // 🔍 Search + Reset functionality
+  const searchInput = document.getElementById("searchInput");
+  const resetBtn = document.getElementById("resetBtn");
 
-        cards.forEach(card => {
-          const title = card.querySelector("h3").textContent.toLowerCase();
-          card.style.display = title.includes(query) ? "block" : "none";
-        });
+  if (searchInput && resetBtn) {
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.toLowerCase();
+      const cards = document.querySelectorAll(".package-card");
+
+      cards.forEach(card => {
+        const title = card.querySelector("h3").textContent.toLowerCase();
+        card.style.display = title.includes(query) ? "block" : "none";
       });
+    });
 
-      resetBtn.addEventListener("click", () => {
-        searchInput.value = "";
-        const cards = document.querySelectorAll(".package-card");
-        cards.forEach(card => card.style.display = "block");
-      });
-    }
+    resetBtn.addEventListener("click", () => {
+      searchInput.value = "";
+      const cards = document.querySelectorAll(".package-card");
+      cards.forEach(card => card.style.display = "block");
+    });
   }
-
-  document.addEventListener("DOMContentLoaded", init);
-
-})();   // IIFE close
+}
+document.addEventListener("DOMContentLoaded", init);
+})();
