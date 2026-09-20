@@ -1109,6 +1109,33 @@ footer {
   border: 1px solid #FFD700;
 }
 
+#about {
+  background-color: #000;   /* black background */
+  color: #FFD700;           /* yellow text */
+  padding: 40px 20px;
+}
+
+#about .section-head--center {
+  margin-bottom: 30px;
+}
+
+#about h2, #about h3 {
+  color: #FFD700;
+}
+
+#about p {
+  color: #FFD700;
+  line-height: 1.6;
+}
+
+.about-quote {
+  font-style: italic;
+  color: #FFD700;
+  margin-top: 20px;
+  border-left: 3px solid #FFD700;
+  padding-left: 15px;
+}
+
 /* ---------------------------------------------------------------------
    UTILITIES
    --------------------------------------------------------------------- */
