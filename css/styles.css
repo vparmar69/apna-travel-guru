@@ -1062,11 +1062,22 @@ footer {
   color: #FFD700;
   border: 1px solid #FFD700;
 }
-
 #about {
   background-color: #000;   /* black background */
   color: #FFD700;           /* yellow text */
   padding: 40px 20px;
+}
+
+#about .eyebrow {
+  color: #FFD700;           /* yellow eyebrow */
+}
+
+#about .section-heading {
+  color: #FFD700;           /* yellow heading */
+}
+
+#about .section-sub {
+  color: #FFD700;           /* yellow paragraph */
 }
 
 .about-boxes {
@@ -1126,7 +1137,6 @@ footer {
   opacity: 1;
   transform: translateY(0);
 }
-
 
 /* ---------------------------------------------------------------------
    UTILITIES
