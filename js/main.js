@@ -388,3 +388,21 @@
 }
 document.addEventListener("DOMContentLoaded", init);
 })();
+
+// === About section animation ===
+document.addEventListener("DOMContentLoaded", () => {
+  const boxes = document.querySelectorAll(".animate");
+
+  function revealOnScroll() {
+    const windowHeight = window.innerHeight;
+    boxes.forEach(box => {
+      const boxTop = box.getBoundingClientRect().top;
+      if (boxTop < windowHeight - 50) {
+        box.classList.add("visible");
+      }
+    });
+  }
+
+  window.addEventListener("scroll", revealOnScroll);
+  revealOnScroll(); // page load par bhi check karega
+});
