@@ -1063,33 +1063,33 @@ footer {
   border: 1px solid #FFD700;
 }
 #about {
-  background-color: #000;   /* black background */
-  color: #FFD700;           /* yellow text */
+  background-color: #000;
+  color: #FFD700;
   padding: 40px 20px;
 }
 
 #about .eyebrow {
-  color: #FFD700;           /* yellow eyebrow */
+  color: #FFD700;
 }
 
 #about .section-heading {
-  color: #FFD700;           /* yellow heading */
+  color: #FFD700;
 }
 
 #about .section-sub {
-  color: #FFD700;           /* yellow paragraph */
+  color: #FFD700;
 }
 
 .about-boxes {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  grid-template-columns: repeat(3, 1fr);
   gap: 25px;
   margin-top: 40px;
 }
 
 @media (max-width: 768px) {
   .about-boxes {
-    grid-template-columns: 1fr; /* mobile par ek column */
+    grid-template-columns: 1fr;
   }
 }
 
