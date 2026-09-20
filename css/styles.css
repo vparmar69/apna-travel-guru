@@ -1135,6 +1135,38 @@ footer {
   border-left: 3px solid #FFD700;
   padding-left: 15px;
 }
+#about {
+  background-color: #000;   /* black background */
+  color: #FFD700;           /* yellow text */
+  padding: 40px 20px;
+}
+
+.about-boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.about-box {
+  background-color: #111;       /* dark background */
+  border: 1px solid #FFD700;    /* yellow border */
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.4); /* yellow glow */
+}
+
+.about-box h3 {
+  color: #FFD700;               /* yellow heading */
+  margin-bottom: 10px;
+}
+
+.about-box p {
+  color: #fff;                  /* white text */
+  font-size: 14px;
+  line-height: 1.5;
+}
 
 /* ---------------------------------------------------------------------
    UTILITIES
