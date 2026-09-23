@@ -308,7 +308,7 @@
   // ---------------------------------------------------------------
   // Social proof band
   // ---------------------------------------------------------------
-  function renderSocialBand() {
+function renderSocialBand() {
   const s = SITE_CONFIG.stats;
   $("#socialBand").innerHTML = `
     <div>
@@ -365,7 +365,7 @@
   // renderAboutStats();   // comment kiya hai
   renderPackageGrid();
 // renderReviews();
- renderSocialBand();
+  renderSocialBand();
   renderContactList();
   initModalDismiss();
   $("#year").textContent = new Date().getFullYear();
