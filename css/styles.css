@@ -1217,12 +1217,12 @@ footer {
 }
 
 
-/* Mobile Responsive */
 @media (max-width: 768px) {
   .animated-band {
-    grid-template-columns: 1fr;
+    flex-direction: column;   /* yahan grid ki jagah flex column likho */
     gap: 20px;
     padding: 30px 20px;
+    text-align: center;
   }
   .animated-band .num {
     font-size: 32px;
