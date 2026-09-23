@@ -1146,48 +1146,51 @@ footer {
   transform: translateY(0);
 }
 
-/* === Social Band in About === */
+//* === Social Band in About (new design) === */
 .animated-band {
-  background: linear-gradient(135deg, #001f3f, #003366); /* deep blue gradient */
-  color: #FFD700;
-  border-radius: 16px;
-  padding: 40px 28px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  background: #fff;              /* white background */
+  color: #000;                   /* black text */
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;                 /* row layout */
+  justify-content: space-between;
   align-items: center;
-  text-align: center;
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
-  animation: fadeInUp 1.2s ease-out;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.animated-band:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 35px rgba(255, 215, 0, 0.6);
-}
-
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(40px); }
-  to { opacity: 1; transform: translateY(0); }
+  max-width: 900px;              /* limit width */
+  margin: 40px auto;             /* center align */
+  box-shadow: 0 0 15px rgba(0,0,0,0.15);
 }
 
 .animated-band .num {
   font-family: var(--font-display);
-  font-size: 38px;
+  font-size: 28px;
   font-weight: 700;
-  color: #FFD700;
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.1); }
+  color: #000;                   /* black number */
 }
 
 .animated-band .label {
-  font-size: 15px;
-  color: #fff;
+  font-size: 14px;
+  color: #333;                   /* dark grey text */
+  margin-top: 4px;
 }
+
+.social-links {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.social-icon-btn img {
+  width: 36px;
+  height: 36px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.social-icon-btn img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 12px rgba(0,0,0,0.3);
+  border-radius: 50%;
+}
+
 
 /* Social Logos */
 .social-links {
