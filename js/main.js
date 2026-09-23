@@ -391,33 +391,16 @@ document.addEventListener("DOMContentLoaded", init);
 
 // === About section animation ===
 document.addEventListener("DOMContentLoaded", () => {
-  const boxes = document.querySelectorAll(".animate");
-
-  function revealOnScroll() {
-    const windowHeight = window.innerHeight;
-    boxes.forEach(box => {
-      const boxTop = box.getBoundingClientRect().top;
-      if (boxTop < windowHeight - 50) {
-        box.classList.add("visible");
-      }
-    });
-  }
-
-  window.addEventListener("scroll", revealOnScroll);
-  revealOnScroll(); // page load par bhi check karega
-});
-
-document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("reviewForm");
   const list = document.getElementById("reviewList");
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const tripName = document.getElementById("tripName").value;
-    const tripDate = document.getElementById("tripDate").value;
-    const rating = document.getElementById("rating").value;
-    const reviewText = document.getElementById("reviewText").value;
+    const name = document.getElementById("reviewName").value;
+    const email = document.getElementById("reviewEmail").value;
+    const rating = document.getElementById("reviewRating").value;
+    const text = document.getElementById("reviewText").value;
     const photos = document.getElementById("reviewPhotos").files;
 
     let stars = "★".repeat(rating) + "☆".repeat(5 - rating);
@@ -426,15 +409,18 @@ document.addEventListener("DOMContentLoaded", () => {
     card.className = "review-card";
     card.innerHTML = `
       <div class="stars">${stars}</div>
-      <p>${reviewText}</p>
-      <strong>${tripName}</strong><br>
-      <span>${tripDate}</span>
+      <p>${text}</p>
+      <strong>${name}</strong><br>
+      <span>${email}</span>
     `;
 
     if (photos.length > 0) {
       Array.from(photos).forEach(file => {
         const img = document.createElement("img");
         img.src = URL.createObjectURL(file);
+        img.style.maxWidth = "100%";
+        img.style.borderRadius = "6px";
+        img.style.marginTop = "8px";
         card.appendChild(img);
       });
     }
