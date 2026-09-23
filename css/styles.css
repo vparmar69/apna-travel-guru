@@ -1138,17 +1138,24 @@ footer {
   transform: translateY(0);
 }
 
+/* === Social Band in About === */
 .animated-band {
   background: linear-gradient(135deg, #001f3f, #003366); /* deep blue gradient */
   color: #FFD700;
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 40px 28px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
   text-align: center;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
-  animation: fadeInUp 1s ease-out;
+  animation: fadeInUp 1.2s ease-out;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.animated-band:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 35px rgba(255, 215, 0, 0.6);
 }
 
 @keyframes fadeInUp {
@@ -1158,41 +1165,55 @@ footer {
 
 .animated-band .num {
   font-family: var(--font-display);
-  font-size: 36px;
+  font-size: 38px;
   font-weight: 700;
   color: #FFD700;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
 }
 
 .animated-band .label {
-  font-size: 14px;
+  font-size: 15px;
   color: #fff;
 }
 
+/* Social Logos */
 .social-links {
   display: flex;
   gap: 14px;
   justify-content: center;
 }
 
-.social-icon-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  color: #fff;
-  transition: transform 0.3s ease, background 0.3s ease;
+.social-icon-btn img {
+  width: 42px;
+  height: 42px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.social-icon-btn.youtube { background: #FF0000; }
-.social-icon-btn.instagram { background: #E1306C; }
-.social-icon-btn.facebook { background: #1877F2; }
-
-.social-icon-btn:hover {
-  transform: scale(1.15);
+.social-icon-btn img:hover {
+  transform: scale(1.2);
   box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+  border-radius: 50%;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .animated-band {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 30px 20px;
+  }
+  .animated-band .num {
+    font-size: 32px;
+  }
+  .social-icon-btn img {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 /* ---------------------------------------------------------------------
