@@ -1138,6 +1138,63 @@ footer {
   transform: translateY(0);
 }
 
+.animated-band {
+  background: linear-gradient(135deg, #001f3f, #003366); /* deep blue gradient */
+  color: #FFD700;
+  border-radius: 12px;
+  padding: 40px 28px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animated-band .num {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 700;
+  color: #FFD700;
+}
+
+.animated-band .label {
+  font-size: 14px;
+  color: #fff;
+}
+
+.social-links {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+}
+
+.social-icon-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: #fff;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.social-icon-btn.youtube { background: #FF0000; }
+.social-icon-btn.instagram { background: #E1306C; }
+.social-icon-btn.facebook { background: #1877F2; }
+
+.social-icon-btn:hover {
+  transform: scale(1.15);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+}
+
 /* ---------------------------------------------------------------------
    UTILITIES
    --------------------------------------------------------------------- */
