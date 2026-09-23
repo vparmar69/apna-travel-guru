@@ -310,7 +310,9 @@
   // ---------------------------------------------------------------
 function renderSocialBand() {
   const s = SITE_CONFIG.stats;
-  $("#socialBand").innerHTML = `
+  const band = document.getElementById("socialBand");
+
+  band.innerHTML = `
     <div>
       <div class="num">${s.followers}</div>
       <div class="label">${s.followersLabel}</div>
@@ -329,8 +331,10 @@ function renderSocialBand() {
       <a class="social-icon-btn" href="${SITE_CONFIG.social.facebook}" target="_blank" rel="noopener" aria-label="Facebook">
         <img src="images/facebook-logo.png" alt="Facebook" />
       </a>
-    </div>`;
+    </div>
+  `;
 }
+
 
   // ---------------------------------------------------------------
   // Contact list
@@ -412,8 +416,6 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", showOnScroll);
   showOnScroll(); // initial check
 });
-
-
 
 
 document.addEventListener("DOMContentLoaded", () => {
