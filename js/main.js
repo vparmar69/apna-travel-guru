@@ -391,6 +391,26 @@ document.addEventListener("DOMContentLoaded", init);
 
 // === About section animation ===
 document.addEventListener("DOMContentLoaded", () => {
+  const boxes = document.querySelectorAll(".about-box.animate");
+
+  function showOnScroll() {
+    boxes.forEach(box => {
+      const rect = box.getBoundingClientRect();
+      if (rect.top < window.innerHeight - 50) {
+        box.classList.add("visible");
+      }
+    });
+  }
+
+  window.addEventListener("scroll", showOnScroll);
+  showOnScroll(); // initial check
+});
+
+
+
+
+
+document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("reviewForm");
   const list = document.getElementById("reviewList");
 
