@@ -190,42 +190,51 @@
 
 
 <!-- =================== REVIEWS =================== -->
+<!-- ==================== REVIEWS ==================== -->
 <section class="section" id="reviews">
-  <div class="container">
-    <div class="section-head--center">
-      <h2 class="section-heading">Traveler Reviews</h2>
-      <p class="section-sub">Share your experience with Apna Travel Guru</p>
+  <div class="container review-layout">
+
+    <!-- Left: Review Cards -->
+    <div class="review-list" id="reviewList">
+      <!-- Example static card -->
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <p>"Amazing trip, very well organized!"</p>
+        <strong>Priya Malik</strong><br>
+        <span>priyam***@gmail.com</span>
+      </div>
     </div>
 
-    <!-- Review Form -->
-    <form id="reviewForm" class="review-form">
-      <label>Trip Name:</label>
-      <input type="text" id="tripName" required />
+    <!-- Right: Review Form -->
+    <div class="review-form">
+      <h3>Leave a Review</h3>
+      <form id="reviewForm">
+        <label>Name:</label>
+        <input type="text" id="reviewName" required />
 
-      <label>Start Date:</label>
-      <input type="date" id="tripDate" required />
+        <label>Gmail ID:</label>
+        <input type="email" id="reviewEmail" required />
 
-      <label>Rating:</label>
-      <select id="rating" required>
-        <option value="">Select</option>
-        <option value="5">★★★★★</option>
-        <option value="4">★★★★☆</option>
-        <option value="3">★★★☆☆</option>
-        <option value="2">★★☆☆☆</option>
-        <option value="1">★☆☆☆☆</option>
-      </select>
+        <label>Rating:</label>
+        <select id="reviewRating" required>
+          <option value="">Select</option>
+          <option value="5">★★★★★</option>
+          <option value="4">★★★★☆</option>
+          <option value="3">★★★☆☆</option>
+          <option value="2">★★☆☆☆</option>
+          <option value="1">★☆☆☆☆</option>
+        </select>
 
-      <label>Your Review:</label>
-      <textarea id="reviewText" rows="4" required></textarea>
+        <label>Your Review:</label>
+        <textarea id="reviewText" rows="4" required></textarea>
 
-      <label>Upload Photos:</label>
-      <input type="file" id="reviewPhotos" multiple accept="image/*" />
+        <label>Upload Photos:</label>
+        <input type="file" id="reviewPhotos" multiple accept="image/*" />
 
-      <button type="submit" class="btn btn--primary">Submit Review</button>
-    </form>
+        <button type="submit" class="btn btn--primary">Submit Review</button>
+      </form>
+    </div>
 
-    <!-- Review List -->
-    <div id="reviewList" class="review-grid"></div>
   </div>
 </section>
 
