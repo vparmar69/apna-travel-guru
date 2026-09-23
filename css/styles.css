@@ -1146,7 +1146,8 @@ footer {
   transform: translateY(0);
 }
 
-//* === Social Band in About (new design) === */
+/* === Social Band in About (new design) === */
+
 .animated-band {
   background: #fff;              /* white background */
   color: #000;                   /* black text */
@@ -1192,24 +1193,6 @@ footer {
 }
 
 
-/* Social Logos */
-.social-links {
-  display: flex;
-  gap: 14px;
-  justify-content: center;
-}
-
-.social-icon-btn img {
-  width: 42px;
-  height: 42px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.social-icon-btn img:hover {
-  transform: scale(1.2);
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
-  border-radius: 50%;
-}
 
 /* Mobile Responsive */
 @media (max-width: 768px) {
