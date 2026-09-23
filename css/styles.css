@@ -678,35 +678,62 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 /* ---------------------------------------------------------------------
    TESTIMONIALS
    --------------------------------------------------------------------- */
+.review-form {
+  background: #111;
+  border: 1px solid #FFD700;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 40px;
+  color: #FFD700;
+}
+
+.review-form label {
+  display: block;
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+.review-form input,
+.review-form select,
+.review-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 6px;
+  border-radius: 6px;
+  border: 1px solid #FFD700;
+  background: #000;
+  color: #FFD700;
+}
+
 .review-grid {
   display: grid;
   gap: 22px;
   grid-template-columns: 1fr;
 }
+
 @media (min-width: 760px) {
   .review-grid { grid-template-columns: repeat(3, 1fr); }
 }
-.review-card {
-  background: #fff;
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-lg);
-  padding: 24px;
-  box-shadow: var(--shadow-card);
-}
-.review-stars { color: var(--color-star); font-size: 14px; margin-bottom: 12px; letter-spacing: 2px; }
-.review-text { color: var(--color-ink); font-size: 14.5px; margin-bottom: 20px; }
-.review-person { display: flex; align-items: center; gap: 12px; }
-.review-avatar {
-  width: 42px; height: 42px;
-  border-radius: 50%;
-  overflow: hidden;
-  background: var(--color-surface-alt);
-  flex-shrink: 0;
-}
-.review-avatar img { width: 100%; height: 100%; object-fit: cover; }
-.review-person strong { font-size: 14px; color: var(--color-navy); display: block; }
-.review-person span { font-size: 12.5px; color: var(--color-slate); }
 
+.review-card {
+  background: #111;
+  border: 1px solid #FFD700;
+  border-radius: 8px;
+  padding: 16px;
+  color: #FFD700;
+  box-shadow: 0 0 12px rgba(255,215,0,0.4);
+}
+
+.review-card .stars {
+  margin-bottom: 8px;
+  color: #FFD700;
+}
+
+.review-card img {
+  max-width: 100%;
+  border-radius: 6px;
+  margin-top: 8px;
+}
 
 /* ---------------------------------------------------------------------
    CONTACT
