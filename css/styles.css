@@ -678,12 +678,36 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 /* ---------------------------------------------------------------------
    TESTIMONIALS
    --------------------------------------------------------------------- */
+.review-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
+
+.review-list {
+  display: grid;
+  gap: 20px;
+}
+
+.review-card {
+  background: #111;
+  border: 1px solid #FFD700;
+  border-radius: 8px;
+  padding: 16px;
+  color: #FFD700;
+  box-shadow: 0 0 12px rgba(255,215,0,0.4);
+}
+
+.review-card .stars {
+  margin-bottom: 8px;
+  color: #FFD700;
+}
+
 .review-form {
   background: #111;
   border: 1px solid #FFD700;
   padding: 20px;
   border-radius: 8px;
-  margin-bottom: 40px;
   color: #FFD700;
 }
 
@@ -705,35 +729,26 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   color: #FFD700;
 }
 
-.review-grid {
-  display: grid;
-  gap: 22px;
-  grid-template-columns: 1fr;
-}
-
-@media (min-width: 760px) {
-  .review-grid { grid-template-columns: repeat(3, 1fr); }
-}
-
-.review-card {
-  background: #111;
-  border: 1px solid #FFD700;
-  border-radius: 8px;
-  padding: 16px;
-  color: #FFD700;
-  box-shadow: 0 0 12px rgba(255,215,0,0.4);
-}
-
-.review-card .stars {
-  margin-bottom: 8px;
-  color: #FFD700;
-}
-
-.review-card img {
-  max-width: 100%;
+.btn.btn--primary {
+  margin-top: 16px;
+  background: #FFD700;
+  color: #000;
+  border: none;
+  padding: 10px 16px;
   border-radius: 6px;
-  margin-top: 8px;
+  cursor: pointer;
 }
+
+.btn.btn--primary:hover {
+  background: #e6c200;
+}
+
+@media (max-width: 768px) {
+  .review-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 /* ---------------------------------------------------------------------
    CONTACT
