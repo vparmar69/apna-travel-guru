@@ -359,7 +359,7 @@
   // renderAboutStats();   // comment kiya hai
   renderPackageGrid();
   renderReviews();
-  renderSocialBand();
+  // renderSocialBand();
   renderContactList();
   initModalDismiss();
   $("#year").textContent = new Date().getFullYear();
