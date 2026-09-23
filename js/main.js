@@ -389,15 +389,16 @@
 document.addEventListener("DOMContentLoaded", init);
 })();
 
-// === About section animation ===
+
+
 document.addEventListener("DOMContentLoaded", () => {
-  const boxes = document.querySelectorAll(".about-box.animate");
+  const animatedElements = document.querySelectorAll(".animate");
 
   function showOnScroll() {
-    boxes.forEach(box => {
-      const rect = box.getBoundingClientRect();
+    animatedElements.forEach(el => {
+      const rect = el.getBoundingClientRect();
       if (rect.top < window.innerHeight - 50) {
-        box.classList.add("visible");
+        el.classList.add("visible");
       }
     });
   }
@@ -405,7 +406,6 @@ document.addEventListener("DOMContentLoaded", () => {
   window.addEventListener("scroll", showOnScroll);
   showOnScroll(); // initial check
 });
-
 
 
 
