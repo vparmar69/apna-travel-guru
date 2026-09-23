@@ -193,12 +193,39 @@
 <section class="section" id="reviews">
   <div class="container">
     <div class="section-head--center">
-      <span class="eyebrow">Traveler Stories</span>
-      <h2 class="section-heading">What our travelers say</h2>
+      <h2 class="section-heading">Traveler Reviews</h2>
+      <p class="section-sub">Share your experience with Apna Travel Guru</p>
     </div>
-    <div class="review-grid" id="reviewGrid">
-      <!-- filled by JS -->
-    </div>
+
+    <!-- Review Form -->
+    <form id="reviewForm" class="review-form">
+      <label>Trip Name:</label>
+      <input type="text" id="tripName" required />
+
+      <label>Start Date:</label>
+      <input type="date" id="tripDate" required />
+
+      <label>Rating:</label>
+      <select id="rating" required>
+        <option value="">Select</option>
+        <option value="5">★★★★★</option>
+        <option value="4">★★★★☆</option>
+        <option value="3">★★★☆☆</option>
+        <option value="2">★★☆☆☆</option>
+        <option value="1">★☆☆☆☆</option>
+      </select>
+
+      <label>Your Review:</label>
+      <textarea id="reviewText" rows="4" required></textarea>
+
+      <label>Upload Photos:</label>
+      <input type="file" id="reviewPhotos" multiple accept="image/*" />
+
+      <button type="submit" class="btn btn--primary">Submit Review</button>
+    </form>
+
+    <!-- Review List -->
+    <div id="reviewList" class="review-grid"></div>
   </div>
 </section>
 
