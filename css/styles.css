@@ -1192,6 +1192,29 @@ footer {
   border-radius: 50%;
 }
 
+@media (max-width: 600px) {
+  .animated-band {
+    flex-direction: column;       /* row → column */
+    text-align: center;           /* center align text */
+    gap: 16px;                    /* space between items */
+    padding: 16px;
+  }
+
+  .animated-band .stats {
+    margin-bottom: 10px;
+  }
+
+  .social-links {
+    justify-content: center;      /* icons center */
+    flex-wrap: wrap;              /* agar jagah kam ho to neeche chale */
+    gap: 10px;
+  }
+
+  .social-icon-btn img {
+    width: 32px;                  /* thoda chhota icons */
+    height: 32px;
+  }
+}
 
 
 /* Mobile Responsive */
