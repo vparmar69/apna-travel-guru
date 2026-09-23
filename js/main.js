@@ -358,7 +358,7 @@
   renderTrustStrip();
   // renderAboutStats();   // comment kiya hai
   renderPackageGrid();
-  renderReviews();
+// renderReviews();
   // renderSocialBand();
   renderContactList();
   initModalDismiss();
@@ -405,4 +405,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.addEventListener("scroll", revealOnScroll);
   revealOnScroll(); // page load par bhi check karega
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("reviewForm");
+  const list = document.getElementById("reviewList");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const tripName = document.getElementById("tripName").value;
+    const tripDate = document.getElementById("tripDate").value;
+    const rating = document.getElementById("rating").value;
+    const reviewText = document.getElementById("reviewText").value;
+    const photos = document.getElementById("reviewPhotos").files;
+
+    let stars = "★".repeat(rating) + "☆".repeat(5 - rating);
+
+    const card = document.createElement("div");
+    card.className = "review-card";
+    card.innerHTML = `
+      <div class="stars">${stars}</div>
+      <p>${reviewText}</p>
+      <strong>${tripName}</strong><br>
+      <span>${tripDate}</span>
+    `;
+
+    if (photos.length > 0) {
+      Array.from(photos).forEach(file => {
+        const img = document.createElement("img");
+        img.src = URL.createObjectURL(file);
+        card.appendChild(img);
+      });
+    }
+
+    list.appendChild(card);
+    form.reset();
+  });
 });
