@@ -309,22 +309,28 @@
   // Social proof band
   // ---------------------------------------------------------------
   function renderSocialBand() {
-    const s = SITE_CONFIG.stats;
-    $("#socialBand").innerHTML = `
-      <div>
-        <div class="num">${s.followers}</div>
-        <div class="label">${s.followersLabel}</div>
-      </div>
-      <div>
-        <div class="num">${s.views}</div>
-        <div class="label">${s.viewsLabel}</div>
-      </div>
-      <div class="social-links">
-        <a class="social-icon-btn" href="${SITE_CONFIG.social.youtube}" target="_blank" rel="noopener" aria-label="YouTube">▶</a>
-        <a class="social-icon-btn" href="${SITE_CONFIG.social.instagram}" target="_blank" rel="noopener" aria-label="Instagram">◎</a>
-        <a class="social-icon-btn" href="${SITE_CONFIG.social.facebook}" target="_blank" rel="noopener" aria-label="Facebook">f</a>
-      </div>`;
-  }
+  const s = SITE_CONFIG.stats;
+  $("#socialBand").innerHTML = `
+    <div>
+      <div class="num">${s.followers}</div>
+      <div class="label">${s.followersLabel}</div>
+    </div>
+    <div>
+      <div class="num">${s.views}</div>
+      <div class="label">${s.viewsLabel}</div>
+    </div>
+    <div class="social-links">
+      <a class="social-icon-btn" href="${SITE_CONFIG.social.youtube}" target="_blank" rel="noopener" aria-label="YouTube">
+        <img src="images/youtube-logo.png" alt="YouTube" />
+      </a>
+      <a class="social-icon-btn" href="${SITE_CONFIG.social.instagram}" target="_blank" rel="noopener" aria-label="Instagram">
+        <img src="images/instagram-logo.png" alt="Instagram" />
+      </a>
+      <a class="social-icon-btn" href="${SITE_CONFIG.social.facebook}" target="_blank" rel="noopener" aria-label="Facebook">
+        <img src="images/facebook-logo.png" alt="Facebook" />
+      </a>
+    </div>`;
+}
 
   // ---------------------------------------------------------------
   // Contact list
@@ -359,7 +365,7 @@
   // renderAboutStats();   // comment kiya hai
   renderPackageGrid();
 // renderReviews();
-  // renderSocialBand();
+ renderSocialBand();
   renderContactList();
   initModalDismiss();
   $("#year").textContent = new Date().getFullYear();
