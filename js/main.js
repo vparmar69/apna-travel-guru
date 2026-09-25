@@ -457,13 +457,30 @@ document.addEventListener("DOMContentLoaded", () => {
   reviews.forEach(r => {
     const card = document.createElement("div");
     card.className = "review-card";
-    card.innerHTML = `
-      <div class="stars">${"★".repeat(r.rating)}</div>
-      <p>"${r.text}"</p>
-      <strong style="color:#FFC400">${r.name}</strong><br>
-      <span>${r.email}</span><br>
-      <small>${r.trip} • ${r.date}</small>
-    `;
+  card.innerHTML = `
+  <div class="review-header">
+    <div class="review-avatar">
+      ${r.photo ? `<img src="${r.photo}" alt="${r.name}" />` : `<div class="avatar">${r.name.charAt(0)}</div>`}
+    </div>
+    <div class="review-user">
+      <strong class="review-name">${r.name}</strong>
+      <span class="review-email">${r.email}</span>
+    </div>
+  </div>
+
+  <div class="review-stars">${"★".repeat(r.rating)}${"☆".repeat(5 - r.rating)}</div>
+
+  <div class="review-meta">
+    <span class="trip-name">${r.trip}</span><br>
+    <small>Trip started on: ${r.tripDate}</small><br>
+    <small>Reviewed on: ${r.createdAt}</small>
+  </div>
+
+  <p class="review-text">
+    ${r.text.length > 100 ? r.text.substring(0, 100) + '... <span class="read-more">Read more</span>' : r.text}
+  </p>
+`;
+
     reviewList.appendChild(card);
   });
 
