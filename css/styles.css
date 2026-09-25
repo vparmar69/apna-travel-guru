@@ -675,9 +675,13 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   margin: 24px -26px -26px;
 }
 
-/* ---------------------------------------------------------------------
-   TESTIMONIALS
-   --------------------------------------------------------------------- */
+/* === Reviews Section (New Design) === */
+#reviews {
+  background: #000; /* black background */
+  color: #f5f5f5;
+  padding: 40px 20px;
+}
+
 .review-layout {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -690,25 +694,32 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 }
 
 .review-card {
-  background: #111;
-  border: 1px solid #FFD700;
-  border-radius: 8px;
-  padding: 16px;
-  color: #FFD700;
-  box-shadow: 0 0 12px rgba(255,215,0,0.4);
+  background: #080F1D;
+  border: 1px solid rgba(255,196,0,0.35);
+  border-radius: 16px;
+  padding: 20px;
+  color: #f5f5f5;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.review-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 12px rgba(255,196,0,0.3);
 }
 
 .review-card .stars {
-  margin-bottom: 8px;
-  color: #FFD700;
+  color: #FFC400;
 }
 
 .review-form {
-  background: #111;
-  border: 1px solid #FFD700;
+  background: #09111F;
+  border: 1px solid rgba(255,196,0,0.35);
+  border-radius: 16px;
   padding: 20px;
-  border-radius: 8px;
-  color: #FFD700;
+}
+
+.review-form h3 {
+  color: #FFC400;
 }
 
 .review-form label {
@@ -724,18 +735,36 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   padding: 10px;
   margin-top: 6px;
   border-radius: 6px;
-  border: 1px solid #FFD700;
+  border: 1px solid rgba(255,196,0,0.35);
   background: #000;
-  color: #FFD700;
+  color: #f5f5f5;
+}
+
+/* Star Rating */
+.star-rating {
+  display: flex;
+  gap: 8px;
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.star-rating span {
+  color: #8FA0B8; /* default muted */
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.star-rating span.selected {
+  color: #FFC400; /* gold when selected */
+  transform: scale(1.2); /* zoom animation */
 }
 
 .btn.btn--primary {
   margin-top: 16px;
-  background: #FFD700;
+  background: #FFC400;
   color: #000;
   border: none;
   padding: 10px 16px;
-  border-radius: 6px;
+  border-radius: 16px;
   cursor: pointer;
 }
 
@@ -748,7 +777,6 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
     grid-template-columns: 1fr;
   }
 }
-
 
 /* ---------------------------------------------------------------------
    CONTACT
