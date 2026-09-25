@@ -519,3 +519,64 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  const reviewForm = document.getElementById("reviewForm");
+  const reviewList = document.getElementById("reviewList");
+
+  // ⭐ Interactive Stars
+  const stars = document.querySelectorAll("#starRating span");
+  const ratingInput = document.getElementById("reviewRating");
+
+  stars.forEach(star => {
+    star.addEventListener("click", () => {
+      const value = star.getAttribute("data-value");
+      ratingInput.value = value;
+      stars.forEach(s => s.classList.remove("selected"));
+      stars.forEach(s => {
+        if (s.getAttribute("data-value") <= value) {
+          s.classList.add("selected");
+        }
+      });
+    });
+  });
+
+  // ⭐ Form Submit
+  reviewForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const trip = document.getElementById("reviewTrip").value;
+    const tripDate = document.getElementById("reviewDate").value;
+    const rating = document.getElementById("reviewRating").value;
+    const text = document.getElementById("reviewText").value;
+
+    // Dummy user info (Google Sign-In ke baad replace hoga)
+    const name = "Test User";
+    const email = "te********@gmail.com";
+    const createdAt = new Date().toLocaleString();
+
+    const card = document.createElement("div");
+    card.className = "review-card";
+    card.innerHTML = `
+      <div class="review-header">
+        <div class="review-avatar"><div class="avatar">${name.charAt(0)}</div></div>
+        <div class="review-user">
+          <strong class="review-name">${name}</strong>
+          <span class="review-email">${email}</span>
+        </div>
+      </div>
+      <div class="review-stars">${"★".repeat(rating)}${"☆".repeat(5 - rating)}</div>
+      <div class="review-meta">
+        <span class="trip-name">${trip}</span><br>
+        <small>Trip started on: ${tripDate}</small><br>
+        <small>Reviewed on: ${createdAt}</small>
+      </div>
+      <p class="review-text">${text}</p>
+    `;
+    reviewList.appendChild(card);
+
+    reviewForm.reset();
+    stars.forEach(s => s.classList.remove("selected"));
+  });
+});
+
