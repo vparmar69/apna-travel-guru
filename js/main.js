@@ -286,26 +286,6 @@
   }
 
   // ---------------------------------------------------------------
-  // Reviews
-  // ---------------------------------------------------------------
-  function renderReviews() {
-    $("#reviewGrid").innerHTML = REVIEWS.map(
-      (r) => `
-      <div class="review-card">
-        <div class="review-stars">${"★".repeat(r.rating)}${"☆".repeat(5 - r.rating)}</div>
-        <p class="review-text">"${r.text}"</p>
-        <div class="review-person">
-          <div class="review-avatar"><img src="${r.photo}" alt="${r.name}" loading="lazy" /></div>
-          <div>
-            <strong>${r.name}</strong>
-            <span>${r.location}</span>
-          </div>
-        </div>
-      </div>`
-    ).join("");
-  }
-
-  // ---------------------------------------------------------------
   // Social proof band
   // ---------------------------------------------------------------
 function renderSocialBand() {
@@ -455,5 +435,70 @@ document.addEventListener("DOMContentLoaded", () => {
 
     list.appendChild(card);
     form.reset();
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const reviewList = document.getElementById("reviewList");
+
+  // Dummy review data (sirf test ke liye)
+  const reviews = [
+    {
+      name: "Priya Malik",
+      email: "pr********@gmail.com",
+      rating: 5,
+      trip: "Ujjain",
+      date: "16/09/2026",
+      text: "Amazing trip, very well organized!"
+    }
+  ];
+
+  // Render reviews
+  reviews.forEach(r => {
+    const card = document.createElement("div");
+    card.className = "review-card";
+    card.innerHTML = `
+      <div class="stars">${"★".repeat(r.rating)}</div>
+      <p>"${r.text}"</p>
+      <strong style="color:#FFC400">${r.name}</strong><br>
+      <span>${r.email}</span><br>
+      <small>${r.trip} • ${r.date}</small>
+    `;
+    reviewList.appendChild(card);
+  });
+
+  // ⭐ Interactive Stars for Form
+  const stars = document.querySelectorAll("#starRating span");
+  const ratingInput = document.getElementById("reviewRating");
+
+  stars.forEach(star => {
+    star.addEventListener("click", () => {
+      const value = star.getAttribute("data-value");
+      ratingInput.value = value;
+
+      // Reset all stars
+      stars.forEach(s => s.classList.remove("selected"));
+
+      // Highlight selected stars
+      stars.forEach(s => {
+        if (s.getAttribute("data-value") <= value) {
+          s.classList.add("selected");
+        }
+      });
+    });
+
+    // Hover preview
+    star.addEventListener("mouseover", () => {
+      const value = star.getAttribute("data-value");
+      stars.forEach(s => {
+        s.style.color = s.getAttribute("data-value") <= value ? "#FFC400" : "#8FA0B8";
+      });
+    });
+
+    star.addEventListener("mouseout", () => {
+      stars.forEach(s => {
+        s.style.color = s.classList.contains("selected") ? "#FFC400" : "#8FA0B8";
+      });
+    });
   });
 });
