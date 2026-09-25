@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Apna Travel Guru — Trusted Travel Partner for Spiritual & Cultural Journeys</title>
@@ -207,6 +209,16 @@
 
         <label>Your Review:</label>
         <textarea id="reviewText" rows="4" required></textarea>
+        
+<div id="g_id_onload"
+     data-client_id="YOUR_GOOGLE_CLIENT_ID"
+     data-context="signin"
+     data-ux_mode="popup"
+     data-callback="handleCredentialResponse"
+     data-auto_prompt="false">
+</div>
+
+<div class="g_id_signin" data-type="standard"></div>
 
         <button type="submit" class="btn btn--primary">Sign in to Submit</button>
       </form>
