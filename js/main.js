@@ -551,15 +551,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const text = document.getElementById("reviewText").value;
 
     // Dummy user info (Google Sign-In ke baad replace hoga)
-    const name = "Test User";
-    const email = "te********@gmail.com";
+const name = window.currentUser?.name || "Guest";
+const email = window.currentUser?.email || "guest@example.com";
+const photo = window.currentUser?.photo || null;
+
     const createdAt = new Date().toLocaleString();
 
     const card = document.createElement("div");
     card.className = "review-card";
     card.innerHTML = `
       <div class="review-header">
-        <div class="review-avatar"><div class="avatar">${name.charAt(0)}</div></div>
+       <div class="review-avatar">
+  ${photo ? `<img src="${photo}" alt="${name}" />` : `<div class="avatar">${name.charAt(0)}</div>`}
+</div>
         <div class="review-user">
           <strong class="review-name">${name}</strong>
           <span class="review-email">${email}</span>
@@ -580,3 +584,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+function handleCredentialResponse(response) {
+  const data = jwt_decode(response.credential);
+  const name = data.name;
+  const email = data.email;
+  const photo = data.picture;
+
+  // Save user info globally
+  window.currentUser = { name, email, photo };
+
+  alert("Signed in as " + name);
+}
