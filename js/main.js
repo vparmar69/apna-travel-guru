@@ -511,3 +511,15 @@ function handleCredentialResponse(response) {
 
   alert("Signed in as " + name);
 }
+
+// ⭐ Yellow button click → Google login ya form submit
+document.querySelector(".btn--primary").addEventListener("click", function(e) {
+  e.preventDefault();
+
+  if (!window.currentUser) {
+    google.accounts.id.prompt();
+    return;
+  }
+
+  document.getElementById("reviewForm").requestSubmit();
+});
