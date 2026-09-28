@@ -399,90 +399,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("reviewForm");
-  const list = document.getElementById("reviewList");
-
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-
-    const name = document.getElementById("reviewName").value;
-    const email = document.getElementById("reviewEmail").value;
-    const rating = document.getElementById("reviewRating").value;
-    const text = document.getElementById("reviewText").value;
-    const photos = document.getElementById("reviewPhotos").files;
-
-    let stars = "★".repeat(rating) + "☆".repeat(5 - rating);
-
-    const card = document.createElement("div");
-    card.className = "review-card";
-    card.innerHTML = `
-      <div class="stars">${stars}</div>
-      <p>${text}</p>
-      <strong>${name}</strong><br>
-      <span>${email}</span>
-    `;
-
-    if (photos.length > 0) {
-      Array.from(photos).forEach(file => {
-        const img = document.createElement("img");
-        img.src = URL.createObjectURL(file);
-        img.style.maxWidth = "100%";
-        img.style.borderRadius = "6px";
-        img.style.marginTop = "8px";
-        card.appendChild(img);
-      });
-    }
-
-    list.appendChild(card);
-    form.reset();
-  });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
   const reviewList = document.getElementById("reviewList");
-
-  // Dummy review data (sirf test ke liye)
-  const reviews = [
-    {
-      name: "Priya Malik",
-      email: "pr********@gmail.com",
-      rating: 5,
-      trip: "Ujjain",
-      date: "16/09/2026",
-      text: "Amazing trip, very well organized!"
-    }
-  ];
-
-  // Render reviews
-  reviews.forEach(r => {
-    const card = document.createElement("div");
-    card.className = "review-card";
-  card.innerHTML = `
-  <div class="review-header">
-    <div class="review-avatar">
-      ${r.photo ? `<img src="${r.photo}" alt="${r.name}" />` : `<div class="avatar">${r.name.charAt(0)}</div>`}
-    </div>
-    <div class="review-user">
-      <strong class="review-name">${r.name}</strong>
-      <span class="review-email">${r.email}</span>
-    </div>
-  </div>
-
-  <div class="review-stars">${"★".repeat(r.rating)}${"☆".repeat(5 - r.rating)}</div>
-
-  <div class="review-meta">
-    <span class="trip-name">${r.trip}</span><br>
-    <small>Trip started on: ${r.tripDate}</small><br>
-    <small>Reviewed on: ${r.createdAt}</small>
-  </div>
-
-  <p class="review-text">
-    ${r.text.length > 100 ? r.text.substring(0, 100) + '... <span class="read-more">Read more</span>' : r.text}
-  </p>
-`;
-
-    reviewList.appendChild(card);
-  });
 
   // ⭐ Interactive Stars for Form
   const stars = document.querySelectorAll("#starRating span");
@@ -550,10 +467,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const rating = document.getElementById("reviewRating").value;
     const text = document.getElementById("reviewText").value;
 
-    // Dummy user info (Google Sign-In ke baad replace hoga)
-const name = window.currentUser?.name || "Guest";
-const email = window.currentUser?.email || "guest@example.com";
-const photo = window.currentUser?.photo || null;
+    // Google Sign-In user info
+    const name = window.currentUser?.name || "Guest";
+    const email = window.currentUser?.email || "guest@example.com";
+    const photo = window.currentUser?.photo || null;
 
     const createdAt = new Date().toLocaleString();
 
@@ -561,9 +478,9 @@ const photo = window.currentUser?.photo || null;
     card.className = "review-card";
     card.innerHTML = `
       <div class="review-header">
-       <div class="review-avatar">
-  ${photo ? `<img src="${photo}" alt="${name}" />` : `<div class="avatar">${name.charAt(0)}</div>`}
-</div>
+        <div class="review-avatar">
+          ${photo ? `<img src="${photo}" alt="${name}" />` : `<div class="avatar">${name.charAt(0)}</div>`}
+        </div>
         <div class="review-user">
           <strong class="review-name">${name}</strong>
           <span class="review-email">${email}</span>
@@ -590,7 +507,6 @@ function handleCredentialResponse(response) {
   const email = data.email;
   const photo = data.picture;
 
-  // Save user info globally
   window.currentUser = { name, email, photo };
 
   alert("Signed in as " + name);
