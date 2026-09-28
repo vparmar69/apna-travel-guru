@@ -523,3 +523,18 @@ document.querySelector(".btn--primary").addEventListener("click", function(e) {
 
   document.getElementById("reviewForm").requestSubmit();
 });
+
+function showReviews(limit = 4) {
+  const reviews = document.querySelectorAll(".review-card");
+  reviews.forEach((card, index) => {
+    card.style.display = index < limit ? "block" : "none";
+  });
+}
+
+// Initial load → sirf 4 reviews
+showReviews();
+
+document.getElementById("viewAllBtn").addEventListener("click", function() {
+  showReviews(999); // sab reviews dikhado
+});
+
