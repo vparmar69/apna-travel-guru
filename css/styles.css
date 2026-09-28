@@ -682,6 +682,21 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   padding: 40px 20px;
 }
 
+/* ⭐ View All button styling */
+#viewAllBtn {
+  display: block;
+  margin: 20px auto;   /* center align */
+  padding: 10px 20px;  /* button size */
+  font-size: 16px;     /* text size */
+  background: #FFC400; /* yellow button */
+  color: #000;         /* black text */
+  border-radius: 12px;
+  cursor: pointer;
+}
+#viewAllBtn:hover {
+  background: #e6c200;
+}
+
 .review-layout {
   display: grid;
   grid-template-columns: 2fr 1fr;
