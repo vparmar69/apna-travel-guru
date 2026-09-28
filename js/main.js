@@ -534,7 +534,10 @@ function showReviews(limit = 4) {
 // Initial load → sirf 4 reviews
 showReviews();
 
-document.getElementById("viewAllBtn").addEventListener("click", function() {
-  showReviews(999); // sab reviews dikhado
-});
+const viewAllBtn = document.getElementById("viewAllBtn");
+if (viewAllBtn) {
+  viewAllBtn.addEventListener("click", function() {
+    showReviews(999); // sab reviews dikhado
+  });
+}
 
