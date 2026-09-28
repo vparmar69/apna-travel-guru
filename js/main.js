@@ -541,3 +541,57 @@ if (viewAllBtn) {
   });
 }
 
+// Global variable to store logged-in user
+let currentUser = null;
+
+// Google Sign-In callback
+function handleCredentialResponse(response) {
+  const data = jwt_decode(response.credential); // decode JWT
+  currentUser = {
+    name: data.name,
+    email: data.email,
+    picture: data.picture
+  };
+  console.log("Logged in user:", currentUser);
+}
+
+// Button click logic
+document.querySelector(".btn--primary").addEventListener("click", function(e) {
+  e.preventDefault();
+
+  // Agar user login nahi hai → popup kholna
+  if (!currentUser) {
+    google.accounts.id.prompt();
+    return;
+  }
+
+  // Agar user login hai → form submit karna
+  document.getElementById("reviewForm").requestSubmit();
+});
+
+// Form submit logic
+document.getElementById("reviewForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  if (!currentUser) {
+    alert("Please sign in first!");
+    return;
+  }
+
+  // Review card create karo
+  const reviewList = document.getElementById("reviewList");
+  const card = document.createElement("div");
+  card.className = "review-card";
+  card.innerHTML = `
+    <div class="review-header">
+      <img src="${currentUser.picture}" alt="${currentUser.name}" style="width:40px;height:40px;border-radius:50%;">
+      <strong>${currentUser.name}</strong> <span>${currentUser.email}</span>
+    </div>
+    <div class="stars">★★★★★</div>
+    <p>${document.getElementById("reviewText").value}</p>
+  `;
+  reviewList.prepend(card);
+
+  // Form reset
+  e.target.reset();
+});
