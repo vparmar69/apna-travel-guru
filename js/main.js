@@ -535,6 +535,7 @@ function handleCredentialResponse(response) {
   };
 
   document.getElementById("reviewForm").requestSubmit();
+
 }
 
 // Button click logic
@@ -574,4 +575,22 @@ document.getElementById("reviewForm").addEventListener("submit", function(e) {
 
   // Form reset
   e.target.reset();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const reviewBtn =
+    document.getElementById("reviewSubmitBtn");
+
+  reviewBtn.addEventListener("click", () => {
+
+    google.accounts.id.initialize({
+      client_id: "1064953363605-2a5s65nu1akhs9qqi0sbnhocj89u8qsi.apps.googleusercontent.com",
+      callback: handleCredentialResponse
+    });
+
+    google.accounts.id.prompt();
+
+  });
+
 });
