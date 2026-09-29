@@ -397,190 +397,173 @@ document.addEventListener("DOMContentLoaded", () => {
   showOnScroll(); // initial check
 });
 
+/* =====================================================================
+   REVIEWS + GOOGLE SIGN-IN  (yeh ek hi block rakhna hai)
+
+   main.js mein IIFE  (function () { ... })();  ke BAAD jo bhi review /
+   star / showReviews / currentUser / handleCredentialResponse / reviewBtn
+   wala code hai, wo sab DELETE karke sirf yeh paste karo.
+   (Scroll-animation wala DOMContentLoaded block rehne do.)
+   ===================================================================== */
+
+const GOOGLE_CLIENT_ID =
+  "1064953363605-2a5s65nu1akhs9qqi0sbnhocj89u8qsi.apps.googleusercontent.com";
 
 document.addEventListener("DOMContentLoaded", () => {
-  const reviewList = document.getElementById("reviewList");
-
-  // ⭐ Interactive Stars for Form
-  const stars = document.querySelectorAll("#starRating span");
+  const form = document.getElementById("reviewForm");
+  const list = document.getElementById("reviewList");
+  const submitBtn = document.getElementById("reviewSubmitBtn");
+  const viewAllBtn = document.getElementById("viewAllBtn");
+  const googleBox = document.getElementById("googleBtnBox");
   const ratingInput = document.getElementById("reviewRating");
-
-  stars.forEach(star => {
-    star.addEventListener("click", () => {
-      const value = star.getAttribute("data-value");
-      ratingInput.value = value;
-
-      // Reset all stars
-      stars.forEach(s => s.classList.remove("selected"));
-
-      // Highlight selected stars
-      stars.forEach(s => {
-        if (s.getAttribute("data-value") <= value) {
-          s.classList.add("selected");
-        }
-      });
-    });
-
-    // Hover preview
-    star.addEventListener("mouseover", () => {
-      const value = star.getAttribute("data-value");
-      stars.forEach(s => {
-        s.style.color = s.getAttribute("data-value") <= value ? "#FFC400" : "#8FA0B8";
-      });
-    });
-
-    star.addEventListener("mouseout", () => {
-      stars.forEach(s => {
-        s.style.color = s.classList.contains("selected") ? "#FFC400" : "#8FA0B8";
-      });
-    });
-  });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  const reviewForm = document.getElementById("reviewForm");
-  const reviewList = document.getElementById("reviewList");
-
-  // ⭐ Interactive Stars
   const stars = document.querySelectorAll("#starRating span");
-  const ratingInput = document.getElementById("reviewRating");
 
-  stars.forEach(star => {
+  if (!form || !list || !submitBtn) return;
+
+  const LIMIT = 4;
+  let showAll = false;
+  let currentUser = null;
+  let googleReady = false;
+
+  // ---------- helpers ----------
+  // User ka likha text HTML ki tarah run na ho (security)
+  const esc = (s) =>
+    String(s).replace(/[&<>"']/g, (c) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
+    }[c]));
+
+  // jwt-decode library ki zarurat nahi
+  function decodeJwt(token) {
+    const b64 = token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/");
+    const json = decodeURIComponent(
+      atob(b64)
+        .split("")
+        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
+        .join("")
+    );
+    return JSON.parse(json);
+  }
+
+  // ---------- stars ----------
+  function paintStars(value) {
+    stars.forEach((s) =>
+      s.classList.toggle("selected", Number(s.dataset.value) <= Number(value || 0))
+    );
+  }
+  stars.forEach((star) => {
     star.addEventListener("click", () => {
-      const value = star.getAttribute("data-value");
-      ratingInput.value = value;
-      stars.forEach(s => s.classList.remove("selected"));
-      stars.forEach(s => {
-        if (s.getAttribute("data-value") <= value) {
-          s.classList.add("selected");
-        }
-      });
+      ratingInput.value = star.dataset.value;
+      paintStars(ratingInput.value);
     });
+    star.addEventListener("mouseover", () => paintStars(star.dataset.value));
+    star.addEventListener("mouseout", () => paintStars(ratingInput.value));
   });
 
-  // ⭐ Form Submit
-  reviewForm.addEventListener("submit", (e) => {
-    e.preventDefault();
+  // ---------- View All ----------
+  function applyLimit() {
+    const cards = list.querySelectorAll(".review-card");
+    cards.forEach((card, i) => {
+      card.style.display = showAll || i < LIMIT ? "" : "none";
+    });
+    if (viewAllBtn) {
+      viewAllBtn.style.display = cards.length > LIMIT ? "block" : "none";
+      viewAllBtn.textContent = showAll ? "Show Less" : "View All";
+    }
+  }
+  if (viewAllBtn) {
+    viewAllBtn.addEventListener("click", () => {
+      showAll = !showAll;
+      applyLimit();
+    });
+  }
 
+  // ---------- add review card ----------
+  function addReview() {
     const trip = document.getElementById("reviewTrip").value;
     const tripDate = document.getElementById("reviewDate").value;
-    const rating = document.getElementById("reviewRating").value;
-    const text = document.getElementById("reviewText").value;
+    const rating = Number(ratingInput.value);
+    const text = document.getElementById("reviewText").value.trim();
 
-    // Google Sign-In user info
-    const name = window.currentUser?.name || "Guest";
-    const email = window.currentUser?.email || "guest@example.com";
-    const photo = window.currentUser?.photo || null;
-
-    const createdAt = new Date().toLocaleString();
+    const avatar = currentUser.picture
+      ? `<img src="${esc(currentUser.picture)}" alt="${esc(currentUser.name)}" referrerpolicy="no-referrer" />`
+      : `<div class="avatar">${esc(currentUser.name.charAt(0))}</div>`;
 
     const card = document.createElement("div");
     card.className = "review-card";
+    // Email publicly dikhana privacy ke liye theek nahi, isliye hata diya
     card.innerHTML = `
       <div class="review-header">
-        <div class="review-avatar">
-          ${photo ? `<img src="${photo}" alt="${name}" />` : `<div class="avatar">${name.charAt(0)}</div>`}
-        </div>
+        <div class="review-avatar">${avatar}</div>
         <div class="review-user">
-          <strong class="review-name">${name}</strong>
-          <span class="review-email">${email}</span>
+          <strong class="review-name">${esc(currentUser.name)}</strong>
         </div>
       </div>
-      <div class="review-stars">${"★".repeat(rating)}${"☆".repeat(5 - rating)}</div>
+      <div class="review-stars stars">${"★".repeat(rating)}${"☆".repeat(5 - rating)}</div>
       <div class="review-meta">
-        <span class="trip-name">${trip}</span><br>
-        <small>Trip started on: ${tripDate}</small><br>
-        <small>Reviewed on: ${createdAt}</small>
+        <span class="trip-name">${esc(trip)}</span><br>
+        <small>Trip started on: ${esc(tripDate)}</small><br>
+        <small>Reviewed on: ${esc(new Date().toLocaleDateString("en-IN"))}</small>
       </div>
-      <p class="review-text">${text}</p>
+      <p class="review-text">${esc(text)}</p>
     `;
-    reviewList.appendChild(card);
+    list.prepend(card);
 
-    reviewForm.reset();
-    stars.forEach(s => s.classList.remove("selected"));
-  });
-});
-
-
-
-function showReviews(limit = 4) {
-  const reviews = document.querySelectorAll(".review-card");
-  reviews.forEach((card, index) => {
-    card.style.display = index < limit ? "block" : "none";
-  });
-}
-
-// Initial load → sirf 4 reviews
-showReviews();
-
-const viewAllBtn = document.getElementById("viewAllBtn");
-if (viewAllBtn) {
-  viewAllBtn.addEventListener("click", function() {
-    showReviews(999); // sab reviews dikhado
-  });
-}
-
-// Global variable to store logged-in user
-let currentUser = null;
-
-// Google Sign-In callback
-function handleCredentialResponse(response) {
-
-  const data = jwt_decode(response.credential);
-
-  currentUser = {
-    name: data.name,
-    email: data.email,
-    picture: data.picture
-  };
-
-  document.getElementById("reviewForm").requestSubmit();
-
-}
-
-
-
-// Form submit logic
-document.getElementById("reviewForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  if (!currentUser) {
-    alert("Please sign in first!");
-    return;
+    form.reset();
+    ratingInput.value = "";
+    paintStars(0);
+    applyLimit();
   }
 
-  // Review card create karo
-  const reviewList = document.getElementById("reviewList");
-  const card = document.createElement("div");
-  card.className = "review-card";
-  card.innerHTML = `
-    <div class="review-header">
-      <img src="${currentUser.picture}" alt="${currentUser.name}" style="width:40px;height:40px;border-radius:50%;">
-      <strong>${currentUser.name}</strong> <span>${currentUser.email}</span>
-    </div>
-    <div class="stars">★★★★★</div>
-    <p>${document.getElementById("reviewText").value}</p>
-  `;
-  reviewList.prepend(card);
+  // ---------- Google sign-in ----------
+  function handleCredentialResponse(response) {
+    try {
+      const data = decodeJwt(response.credential);
+      currentUser = { name: data.name, email: data.email, picture: data.picture };
+    } catch (err) {
+      console.error("Google token decode failed:", err);
+      alert("Sign-in mein problem aayi, dobara try karo.");
+      return;
+    }
+    googleBox.style.display = "none";
+    submitBtn.textContent = "Submit Review";
+    addReview(); // sign-in ke turant baad review post ho jaata hai
+  }
 
-  // Form reset
-  e.target.reset();
-});
+  function showGoogleButton() {
+    if (typeof google === "undefined" || !google.accounts) {
+      alert("Google Sign-In load nahi hua. Internet check karo aur page refresh karo.");
+      return;
+    }
+    if (!googleReady) {
+      google.accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: handleCredentialResponse,
+      });
+      google.accounts.id.renderButton(googleBox, {
+        theme: "filled_blue",
+        size: "large",
+        shape: "pill",
+        text: "signin_with",
+      });
+      googleReady = true;
+    }
+    googleBox.style.display = "flex";
+    googleBox.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
 
-document.addEventListener("DOMContentLoaded", () => {
-
-  const reviewBtn =
-    document.getElementById("reviewSubmitBtn");
-
-  reviewBtn.addEventListener("click", () => {
-
-    google.accounts.id.initialize({
-      client_id: "1064953363605-2a5s65nu1akhs9qqi0sbnhocj89u8qsi.apps.googleusercontent.com",
-      callback: handleCredentialResponse
-    });
-
-    google.accounts.id.prompt();
-
+  // ---------- main button ----------
+  submitBtn.addEventListener("click", () => {
+    if (!form.checkValidity()) {
+      form.reportValidity();
+      return;
+    }
+    if (!ratingInput.value) {
+      alert("Please star rating select karo.");
+      return;
+    }
+    if (currentUser) addReview();
+    else showGoogleButton();
   });
 
+  applyLimit();
 });
