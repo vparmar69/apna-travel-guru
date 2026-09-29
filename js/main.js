@@ -501,16 +501,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-function handleCredentialResponse(response) {
-  const data = jwt_decode(response.credential);
-  const name = data.name;
-  const email = data.email;
-  const photo = data.picture;
-
-  window.currentUser = { name, email, photo };
-
-  alert("Signed in as " + name);
-}
 
 // ⭐ Yellow button click → Google login ya form submit
 document.querySelector(".btn--primary").addEventListener("click", function(e) {
@@ -546,27 +536,28 @@ let currentUser = null;
 
 // Google Sign-In callback
 function handleCredentialResponse(response) {
-  const data = jwt_decode(response.credential); // decode JWT
+
+  const data = jwt_decode(response.credential);
+
   currentUser = {
     name: data.name,
     email: data.email,
     picture: data.picture
   };
-  console.log("Logged in user:", currentUser);
+
+  document.getElementById("reviewForm").requestSubmit();
 }
 
 // Button click logic
-document.querySelector(".btn--primary").addEventListener("click", function(e) {
-  e.preventDefault();
+document.getElementById("reviewSubmitBtn").addEventListener("click", function() {
 
-  // Agar user login nahi hai → popup kholna
   if (!currentUser) {
     google.accounts.id.prompt();
     return;
   }
 
-  // Agar user login hai → form submit karna
   document.getElementById("reviewForm").requestSubmit();
+
 });
 
 // Form submit logic
