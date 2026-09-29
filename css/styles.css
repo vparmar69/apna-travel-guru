@@ -782,7 +782,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
   transform: scale(1.2); /* zoom animation */
 }
 
-.btn.btn--primary {
+.review-form .btn--primary {
   margin-top: 16px;
   background: #FFC400;
   color: #000;
@@ -795,7 +795,7 @@ button { font: inherit; cursor: pointer; border: none; background: none; }
 }
 
 
-.btn.btn--primary:hover {
+.review-form .btn--primary:hover {
   background: #e6c200;
 }
 
