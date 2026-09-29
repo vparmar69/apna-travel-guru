@@ -538,17 +538,7 @@ function handleCredentialResponse(response) {
 
 }
 
-// Button click logic
-document.getElementById("reviewSubmitBtn").addEventListener("click", function() {
 
-  if (!currentUser) {
-    google.accounts.id.prompt();
-    return;
-  }
-
-  document.getElementById("reviewForm").requestSubmit();
-
-});
 
 // Form submit logic
 document.getElementById("reviewForm").addEventListener("submit", function(e) {
