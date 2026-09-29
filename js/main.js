@@ -502,17 +502,6 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-// ⭐ Yellow button click → Google login ya form submit
-document.querySelector(".btn--primary").addEventListener("click", function(e) {
-  e.preventDefault();
-
-  if (!window.currentUser) {
-    google.accounts.id.prompt();
-    return;
-  }
-
-  document.getElementById("reviewForm").requestSubmit();
-});
 
 function showReviews(limit = 4) {
   const reviews = document.querySelectorAll(".review-card");
