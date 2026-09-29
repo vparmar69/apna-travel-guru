@@ -405,6 +405,11 @@ document.addEventListener("DOMContentLoaded", () => {
    wala code hai, wo sab DELETE karke sirf yeh paste karo.
    (Scroll-animation wala DOMContentLoaded block rehne do.)
    ===================================================================== */
+/* =====================================================================
+   REVIEWS + GOOGLE SIGN-IN  (v2)
+   "Sign in to Submit" dabate hi seedha Google login popup khulta hai.
+   Alag blue button / googleBtnBox ki zarurat nahi.
+   ===================================================================== */
 
 const GOOGLE_CLIENT_ID =
   "1064953363605-2a5s65nu1akhs9qqi0sbnhocj89u8qsi.apps.googleusercontent.com";
@@ -414,7 +419,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const list = document.getElementById("reviewList");
   const submitBtn = document.getElementById("reviewSubmitBtn");
   const viewAllBtn = document.getElementById("viewAllBtn");
-  const googleBox = document.getElementById("googleBtnBox");
   const ratingInput = document.getElementById("reviewRating");
   const stars = document.querySelectorAll("#starRating span");
 
@@ -423,26 +427,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const LIMIT = 4;
   let showAll = false;
   let currentUser = null;
-  let googleReady = false;
+  let tokenClient = null;
 
   // ---------- helpers ----------
-  // User ka likha text HTML ki tarah run na ho (security)
   const esc = (s) =>
     String(s).replace(/[&<>"']/g, (c) => ({
       "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
     }[c]));
-
-  // jwt-decode library ki zarurat nahi
-  function decodeJwt(token) {
-    const b64 = token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/");
-    const json = decodeURIComponent(
-      atob(b64)
-        .split("")
-        .map((c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2))
-        .join("")
-    );
-    return JSON.parse(json);
-  }
 
   // ---------- stars ----------
   function paintStars(value) {
@@ -490,7 +481,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const card = document.createElement("div");
     card.className = "review-card";
-    // Email publicly dikhana privacy ke liye theek nahi, isliye hata diya
     card.innerHTML = `
       <div class="review-header">
         <div class="review-avatar">${avatar}</div>
@@ -514,41 +504,48 @@ document.addEventListener("DOMContentLoaded", () => {
     applyLimit();
   }
 
-  // ---------- Google sign-in ----------
-  function handleCredentialResponse(response) {
-    try {
-      const data = decodeJwt(response.credential);
-      currentUser = { name: data.name, email: data.email, picture: data.picture };
-    } catch (err) {
-      console.error("Google token decode failed:", err);
-      alert("Sign-in mein problem aayi, dobara try karo.");
+  // ---------- Google login (popup) ----------
+  async function onGoogleToken(resp) {
+    if (!resp || resp.error || !resp.access_token) {
+      console.error("Google login error:", resp);
+      alert("Google login cancel ho gaya ya fail hua. Dobara try karo.");
+      submitBtn.disabled = false;
       return;
     }
-    googleBox.style.display = "none";
-    submitBtn.textContent = "Submit Review";
-    addReview(); // sign-in ke turant baad review post ho jaata hai
+    try {
+      const r = await fetch("https://www.googleapis.com/oauth2/v3/userinfo", {
+        headers: { Authorization: "Bearer " + resp.access_token },
+      });
+      const data = await r.json();
+      currentUser = {
+        name: data.name || "Traveler",
+        email: data.email,
+        picture: data.picture,
+      };
+      submitBtn.textContent = "Submit Review";
+      addReview(); // login ke turant baad review post
+    } catch (err) {
+      console.error(err);
+      alert("User info nahi mil paayi. Dobara try karo.");
+    }
+    submitBtn.disabled = false;
   }
 
-  function showGoogleButton() {
-    if (typeof google === "undefined" || !google.accounts) {
+  function googleLogin() {
+    if (typeof google === "undefined" || !google.accounts || !google.accounts.oauth2) {
       alert("Google Sign-In load nahi hua. Internet check karo aur page refresh karo.");
       return;
     }
-    if (!googleReady) {
-      google.accounts.id.initialize({
+    if (!tokenClient) {
+      tokenClient = google.accounts.oauth2.initTokenClient({
         client_id: GOOGLE_CLIENT_ID,
-        callback: handleCredentialResponse,
+        scope: "openid email profile",
+        callback: onGoogleToken,
+        error_callback: () => { submitBtn.disabled = false; },
       });
-      google.accounts.id.renderButton(googleBox, {
-        theme: "filled_blue",
-        size: "large",
-        shape: "pill",
-        text: "signin_with",
-      });
-      googleReady = true;
     }
-    googleBox.style.display = "flex";
-    googleBox.scrollIntoView({ behavior: "smooth", block: "center" });
+    submitBtn.disabled = true;
+    tokenClient.requestAccessToken({ prompt: "select_account" });
   }
 
   // ---------- main button ----------
@@ -562,7 +559,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
     if (currentUser) addReview();
-    else showGoogleButton();
+    else googleLogin(); // popup seedha yahin khulta hai
   });
 
   applyLimit();
