@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>All Reviews — Apna Travel Guru</title>
+<meta name="description" content="Read all traveler reviews for Apna Travel Guru spiritual and cultural tour packages." />
+<link rel="canonical" href="https://www.apnatravelguru.com/reviews.html" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/reviews.css" />
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+
+<style>
+  .ar-top { max-width: 1160px; margin: 0 auto; padding: 28px 20px 10px; }
+  .ar-back { display: inline-block; color: #FFC400; font-weight: 600; margin-bottom: 18px; }
+  .ar-back:hover { text-decoration: underline; }
+  .ar-top h1 { font-family: var(--font-display); font-size: clamp(28px, 5vw, 40px); margin-bottom: 8px; }
+  #count { color: #8FA0B8; font-size: 14px; margin-bottom: 6px; }
+  #authBox { font-size: 13.5px; color: #FFD700; }
+  #authBox a { color: #FFC400; text-decoration: underline; cursor: pointer; }
+  .ar-main { max-width: 1160px; margin: 0 auto; padding: 20px 20px 60px; }
+  .ar-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); }
+</style>
+</head>
+<body>
+
+<header class="ar-top">
+  <a href="index.html" class="ar-back">← Back to Website</a>
+  <h1>All Reviews</h1>
+  <p id="count"></p>
+  <p id="authBox"></p>
+</header>
+
+<main class="ar-main">
+  <div class="rv-grid ar-grid" id="allReviews">
+    <p class="rv-empty">Loading reviews...</p>
+  </div>
+</main>
+
+<script type="module" src="js/all-reviews.js"></script>
+</body>
+</html>
