@@ -1,0 +1,207 @@
+/* =====================================================================
+   REVIEWS SECTION — naya design (compact cards + glow form)
+   Ye file styles.css ke BAAD load hoti hai, isliye purane review styles
+   ko override kar deti hai.
+   ===================================================================== */
+
+#reviews { background: #000; padding: 60px 20px; }
+
+.rv-layout {
+  display: grid;
+  grid-template-columns: 1.7fr 1fr;
+  gap: 34px;
+  align-items: start;
+}
+@media (max-width: 900px) { .rv-layout { grid-template-columns: 1fr; } }
+
+/* ---------- cards grid ---------- */
+.rv-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 22px;
+}
+@media (max-width: 560px) { .rv-grid { grid-template-columns: 1fr; } }
+
+.rv-empty { color: #8FA0B8; grid-column: 1 / -1; }
+
+.rv-card {
+  background: #0a1220;
+  border: 1px solid rgba(255, 196, 0, 0.22);
+  border-radius: 16px;
+  padding: 18px 20px;
+  min-height: 270px;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.rv-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 0 14px rgba(255, 196, 0, 0.25);
+}
+
+.rv-head { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.rv-avatar {
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 196, 0, 0.5);
+  background: #111;
+  color: #FFC400;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+}
+.rv-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.rv-name { color: #FFC400; font-weight: 600; font-size: 15px; line-height: 1.2; }
+.rv-email { color: #8FA0B8; font-size: 12px; margin-top: 2px; }
+
+.rv-rating {
+  text-align: center;
+  color: #FFC400;
+  font-size: 22px;
+  letter-spacing: 4px;
+  margin: 6px 0 12px;
+}
+.rv-rating .rv-off { color: #3a4557; }
+
+.rv-meta { font-size: 12px; color: #8FA0B8; line-height: 1.55; margin-bottom: 10px; }
+.rv-meta .rv-trip { color: #7d8ba1; }
+.rv-edited { color: #FFC400; margin-left: 8px; }
+
+/* review text: 3 line, phir "...Read more" */
+.rv-body { position: relative; font-size: 14px; line-height: 1.5; color: #f5f5f5; }
+.rv-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  white-space: pre-line;
+  word-break: break-word;
+}
+.rv-more {
+  display: none;
+  position: absolute;
+  right: 0; bottom: 0;
+  padding-left: 28px;
+  background: linear-gradient(90deg, rgba(10, 18, 32, 0), #0a1220 30%);
+  color: #FFC400;
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.rv-body.clamped .rv-more { display: block; }
+.rv-more:hover { text-decoration: underline; }
+
+.rv-body.expanded .rv-text { display: block; -webkit-line-clamp: unset; overflow: visible; }
+.rv-body.expanded .rv-more {
+  display: block;
+  position: static;
+  background: none;
+  padding: 6px 0 0;
+  text-align: right;
+}
+
+/* edit / delete */
+.rv-actions { display: flex; gap: 8px; margin-top: auto; padding-top: 12px; }
+.rv-actions button {
+  padding: 6px 14px;
+  border-radius: 8px;
+  border: 1px solid #FFC400;
+  background: transparent;
+  color: #FFC400;
+  font-size: 13px;
+  cursor: pointer;
+}
+.rv-actions button.danger { border-color: #ff6b6b; color: #ff6b6b; }
+
+/* ---------- View All (cards ki poori width) ---------- */
+#reviews #viewAllBtn {
+  display: block;
+  width: 100%;
+  margin: 22px 0 0;
+  padding: 14px;
+  border: 0;
+  border-radius: 14px;
+  background: #FFC400;
+  color: #000;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: none;
+}
+#reviews #viewAllBtn:hover { background: #e6b000; }
+
+/* ---------- Leave a Review form ---------- */
+.rv-form {
+  background: linear-gradient(160deg, #0b1424, #070c17);
+  border: 1px solid rgba(255, 196, 0, 0.28);
+  border-radius: 22px;
+  padding: 28px 26px;
+  box-shadow: 0 0 30px rgba(255, 196, 0, 0.1);
+}
+.rv-form h3 { color: #FFC400; font-size: 26px; margin-bottom: 4px; }
+.rv-form .rv-sub { color: #8FA0B8; font-size: 13.5px; margin-bottom: 8px; }
+.rv-form label {
+  display: block;
+  margin: 16px 0 8px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #cfd6e2;
+}
+.rv-form .req { color: #ff5a5a; }
+
+.rv-form select,
+.rv-form input[type="date"],
+.rv-form textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 196, 0, 0.18);
+  background: #050a14;
+  color: #f5f5f5;
+  font-size: 15px;
+  font-family: inherit;
+  color-scheme: dark;
+}
+.rv-form textarea { min-height: 120px; resize: vertical; }
+.rv-form select:focus,
+.rv-form input:focus,
+.rv-form textarea:focus {
+  outline: none;
+  border-color: rgba(255, 196, 0, 0.6);
+}
+
+#reviews .star-rating { font-size: 22px; gap: 6px; margin-left: 4px; }
+#reviews .star-rating span { color: #3f4a5c; }
+#reviews .star-rating span.selected { color: #FFC400; }
+
+.rv-submit {
+  display: block;
+  width: 100%;
+  margin-top: 22px;
+  padding: 15px;
+  border: 0;
+  border-radius: 999px;
+  background: #FFC400;
+  color: #000;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 0 22px rgba(255, 196, 0, 0.35);
+}
+.rv-submit:hover { background: #e6b000; }
+.rv-submit:disabled { opacity: 0.6; cursor: wait; }
+
+.rv-cancel {
+  display: block;
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 999px;
+  border: 1px solid #FFC400;
+  background: transparent;
+  color: #FFC400;
+  cursor: pointer;
+}
+.rv-authinfo { margin-top: 12px; font-size: 13px; color: #8FA0B8; text-align: center; }
+.rv-authinfo a { color: #FFC400; text-decoration: underline; }
