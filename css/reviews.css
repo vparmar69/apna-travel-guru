@@ -205,3 +205,23 @@
 }
 .rv-authinfo { margin-top: 12px; font-size: 13px; color: #8FA0B8; text-align: center; }
 .rv-authinfo a { color: #FFC400; text-decoration: underline; }
+
+/* ===== Mobile par reviews swipe (left-right) ===== */
+@media (max-width: 600px) {
+  #reviewList {
+    display: flex;
+    grid-template-columns: none;
+    gap: 14px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 2px 12px;
+    scrollbar-width: none;
+  }
+  #reviewList::-webkit-scrollbar { display: none; }
+
+  #reviewList .rv-card {
+    flex: 0 0 85%;
+    scroll-snap-align: center;
+  }
+}
