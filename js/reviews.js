@@ -243,5 +243,44 @@ if (form && list && submitBtn) {
     updateAuthUI();
   });
 
+   /* ===== Mobile swipe arrows < > ===== */
+(function () {
+  const list = document.getElementById("reviewList");
+  if (!list) return;
+  const wrap = list.parentElement;
+
+  const prev = document.createElement("button");
+  prev.type = "button";
+  prev.className = "rv-arrow rv-prev";
+  prev.setAttribute("aria-label", "Previous review");
+  prev.textContent = "‹";
+
+  const next = document.createElement("button");
+  next.type = "button";
+  next.className = "rv-arrow rv-next";
+  next.setAttribute("aria-label", "Next review");
+  next.textContent = "›";
+
+  wrap.appendChild(prev);
+  wrap.appendChild(next);
+
+  const step = () => {
+    const card = list.querySelector(".rv-card");
+    return card ? card.offsetWidth + 14 : list.clientWidth;
+  };
+  prev.addEventListener("click", () => list.scrollBy({ left: -step(), behavior: "smooth" }));
+  next.addEventListener("click", () => list.scrollBy({ left: step(), behavior: "smooth" }));
+
+  function update() {
+    const max = list.scrollWidth - list.clientWidth - 2;
+    prev.classList.toggle("is-hidden", list.scrollLeft <= 2);
+    next.classList.toggle("is-hidden", list.scrollLeft >= max);
+  }
+  list.addEventListener("scroll", update, { passive: true });
+  window.addEventListener("resize", update);
+  new MutationObserver(update).observe(list, { childList: true });
+  update();
+})();
+
   updateAuthUI();
 }
