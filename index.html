@@ -173,19 +173,25 @@
 <div id="socialBand" class="animated-band animate"></div>
 
 <!-- =================== REVIEWS =================== -->
+<!-- =================== REVIEWS =================== -->
 <section class="section" id="reviews">
-  <div class="container review-layout">
+  <div class="container rv-layout">
 
-    <!-- Left: Review Cards -->
-    <div class="review-list" id="reviewList">
-      <!-- JS se reviews inject honge -->
+    <!-- Left: review cards + View All -->
+    <div class="rv-left">
+      <div class="rv-grid" id="reviewList">
+        <!-- reviews.js yahan cards bharta hai -->
+      </div>
+      <button type="button" id="viewAllBtn">View All</button>
     </div>
 
-    <!-- Right: Review Form -->
-    <div class="review-form">
+    <!-- Right: form -->
+    <div class="rv-form">
       <h3>Leave a Review</h3>
+      <p class="rv-sub">Share your experience with other travellers</p>
+
       <form id="reviewForm">
-        <label>Trip:</label>
+        <label for="reviewTrip">Trip <span class="req">*</span></label>
         <select id="reviewTrip" required>
           <option value="">Select Trip</option>
           <option value="Ujjain">Ujjain</option>
@@ -193,11 +199,10 @@
           <option value="Kutch">Kutch</option>
         </select>
 
-        <label>Trip Start Date:</label>
+        <label for="reviewDate">Trip Start Date <span class="req">*</span></label>
         <input type="date" id="reviewDate" required />
 
-        <label>Rating:</label>
-        <!-- Interactive Stars -->
+        <label>Rating <span class="req">*</span></label>
         <div class="star-rating" id="starRating">
           <span data-value="1">★</span>
           <span data-value="2">★</span>
@@ -205,23 +210,18 @@
           <span data-value="4">★</span>
           <span data-value="5">★</span>
         </div>
-        <input type="hidden" id="reviewRating" required />
+        <input type="hidden" id="reviewRating" />
 
-        <label>Your Review:</label>
-        <textarea id="reviewText" rows="4" required></textarea>
+        <label for="reviewText">Review <span class="req">*</span></label>
+        <textarea id="reviewText" rows="4" maxlength="1000" required></textarea>
 
-     <button type="button" id="reviewSubmitBtn" class="btn btn--primary">
-  Sign in to Submit
-</button>
+        <button type="button" id="reviewSubmitBtn" class="rv-submit">Sign in to Submit</button>
       </form>
     </div>
 
   </div>
 </section>
      
-    <!-- ⭐ Yaha button add karo -->
-    <button id="viewAllBtn" class="btn btn--secondary">View All</button>
-  
 <!-- =================== CONTACT =================== -->
 <section class="section section--alt" id="contact">
   <div class="container">
