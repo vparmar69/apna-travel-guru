@@ -225,3 +225,17 @@
     scroll-snap-align: center;
   }
 }
+/* ===== Mobile size fix ===== */
+.rv-left,
+.rv-form { min-width: 0; }
+
+@media (max-width: 900px) {
+  .rv-layout { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (max-width: 600px) {
+  #reviews { padding: 40px 8px; }
+  #reviewList { max-width: 100%; }
+  #reviewList .rv-card { flex: 0 0 88%; min-width: 0; }
+  .rv-form { padding: 22px 18px; }
+}
