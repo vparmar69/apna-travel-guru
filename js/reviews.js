@@ -243,7 +243,7 @@ if (form && list && submitBtn) {
     updateAuthUI();
   });
 
-   /* ===== Mobile swipe arrows < > ===== */
+/* ===== Mobile swipe arrows < > ===== */
 (function () {
   const list = document.getElementById("reviewList");
   if (!list) return;
@@ -275,12 +275,16 @@ if (form && list && submitBtn) {
     const max = list.scrollWidth - list.clientWidth - 2;
     prev.classList.toggle("is-hidden", list.scrollLeft <= 2);
     next.classList.toggle("is-hidden", list.scrollLeft >= max);
+
+    // arrows ko card ke bilkul beech (upar-neeche) mein rakho
+    const mid = list.offsetTop + list.offsetHeight / 2;
+    prev.style.top = mid + "px";
+    next.style.top = mid + "px";
   }
+
   list.addEventListener("scroll", update, { passive: true });
   window.addEventListener("resize", update);
   new MutationObserver(update).observe(list, { childList: true });
+  if (window.ResizeObserver) new ResizeObserver(update).observe(list);
   update();
 })();
-
-  updateAuthUI();
-}
