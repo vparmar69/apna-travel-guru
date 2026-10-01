@@ -243,6 +243,9 @@ if (form && list && submitBtn) {
     updateAuthUI();
   });
 
+  updateAuthUI();
+}
+
 /* ===== Mobile swipe arrows < > ===== */
 (function () {
   const list = document.getElementById("reviewList");
