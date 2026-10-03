@@ -95,18 +95,20 @@
     </div>
   </div>
 </section>
-<!-- =================== SEARCH SECTION =================== -->
+
+  <!-- =================== SEARCH SECTION =================== -->
 <section class="search-section">
   <div class="container">
     <h2 class="search-heading">Explore Our Curated Trips</h2>
-   <div class="search-bar">
-  <span class="search-icon">🔍</span>
-  <input type="text" id="searchInput" placeholder="Search destinations by name or location..." />
-  <button id="resetBtn" class="btn btn--primary">Reset</button>
-</div>
+    <div class="search-bar">
+      <svg class="search-ico" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FFC400" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+      <input type="search" id="searchInput" placeholder="Search destinations, e.g. Kedarnath, Manali, Ujjain" aria-label="Search destinations" autocomplete="off" />
+      <a href="#packages" class="search-go">Search</a>
+    </div>
+    <!-- Ye button dikhta nahi, purane code ke liye zaruri hai. Hatana mat. -->
+    <button id="resetBtn" type="button" style="display:none">Reset</button>
   </div>
 </section>
-
 <!-- =================== PACKAGES =================== -->
 <section class="section section--alt" id="packages">
   <div class="container">
