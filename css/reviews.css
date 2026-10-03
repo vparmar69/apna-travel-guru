@@ -549,3 +549,162 @@
   }
   .ab-dot.is-active { width: 24px; background: #FFC400; }
 }
+
+/* =====================================================================
+   HERO (design G) — zoom background + entrance animation
+   Ye code css/reviews.css ke sabse neeche jodna hai.
+   ===================================================================== */
+
+.hero {
+  background-image: none;          /* photo ab ::before mein hai (zoom ke liye) */
+  background-color: #0c2036;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 640px;
+}
+
+/* background photo: khulte hi dheere dheere zoom hoti hai */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../images/hero/hero-background.jpg") center / cover no-repeat;
+  transform-origin: center;
+  animation: heroZoom 16s ease-out forwards;
+  will-change: transform;
+}
+@keyframes heroZoom {
+  from { transform: scale(1); }
+  to   { transform: scale(1.14); }
+}
+
+/* halka dark layer, neeche black mein mil jata hai */
+.hero-media::after {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.45) 0%, rgba(0, 0, 0, 0.55) 65%, #000 100%);
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  padding: 40px 20px;
+}
+
+/* ---------- heading (Poppins ExtraBold) ---------- */
+.hero h1 {
+  font-family: "Poppins", var(--font-body);
+  font-weight: 800;
+  font-size: clamp(30px, 6.2vw, 66px);
+  line-height: 1.12;
+  letter-spacing: 0;
+  max-width: 920px;
+  margin: 0;
+  color: #fff;
+  animation: heroUp 0.8s ease-out 0.1s backwards;
+}
+.hero h1 .hl { position: relative; display: inline-block; color: #FFC400; }
+.hero h1 .hl-line {
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 16px;
+  overflow: visible;
+}
+.hero h1 .hl-line path {
+  fill: none;
+  stroke: #FFC400;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  animation: heroDraw 0.9s ease-out 1s forwards;   /* line haath se khinchti dikhti hai */
+}
+@keyframes heroDraw { to { stroke-dashoffset: 0; } }
+
+/* ---------- tagline, button, trust line ---------- */
+.hero #heroTagline {
+  font-size: clamp(15px, 2vw, 19px);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 640px;
+  margin: 0;
+  animation: heroUp 0.8s ease-out 0.3s backwards;
+}
+
+.hero-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFC400;
+  color: #000;
+  border-radius: 999px;
+  padding: 18px 44px;
+  font-size: 17px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.15s ease, background 0.15s ease;
+  animation: heroUp 0.8s ease-out 0.5s backwards, heroPulse 2.8s ease-out 2.2s infinite;
+}
+.hero-btn:hover { background: #e6b000; transform: translateY(-2px); }
+@keyframes heroPulse {
+  0%        { box-shadow: 0 0 0 0 rgba(255, 196, 0, 0.45); }
+  70%, 100% { box-shadow: 0 0 0 18px rgba(255, 196, 0, 0); }
+}
+
+.hero-trust {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.85);
+  animation: heroUp 0.8s ease-out 0.7s backwards;
+}
+.hero-trust .stars { color: #FFC400; letter-spacing: 2px; }
+
+@keyframes heroUp {
+  from { opacity: 0; transform: translateY(26px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- neeche scroll ka chhota arrow ---------- */
+.hero-scroll {
+  position: absolute;
+  left: 50%;
+  bottom: 28px;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  transform: translateX(-50%);
+  animation: heroBounce 2s ease-in-out infinite;
+}
+@keyframes heroBounce {
+  0%, 100% { transform: translate(-50%, 0); }
+  50%      { transform: translate(-50%, 8px); }
+}
+
+/* ---------- mobile ---------- */
+@media (max-width: 768px) {
+  .hero { min-height: 560px; }
+  .hero::before { background-position: top center; }
+  .hero-btn { padding: 16px 34px; font-size: 16px; }
+  .hero-scroll { bottom: 20px; }
+}
+
+/* jinko animation pasand nahi (phone ki setting), unke liye band */
+@media (prefers-reduced-motion: reduce) {
+  .hero::before,
+  .hero h1,
+  .hero #heroTagline,
+  .hero-btn,
+  .hero-trust,
+  .hero-scroll { animation: none; }
+  .hero h1 .hl-line path { animation: none; stroke-dashoffset: 0; }
+}
