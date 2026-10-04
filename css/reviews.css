@@ -717,3 +717,206 @@
   .hero h1 .hl-line { bottom: -3px; height: 10px; }
   .hero h1 .hl-line path { stroke-width: 2.2; }
 }
+/* =====================================================================
+   CONTACT SECTION (design A: dark cards + map) + animation
+   Ye code css/reviews.css ke sabse neeche jodna hai.
+   ===================================================================== */
+
+#contact { background: #000; padding: 72px 20px; }
+
+/* ---------- heading ---------- */
+.ct-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.ct-eyebrow {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #FFC400;
+}
+#contact .ct-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4.5vw, 44px);
+  font-weight: 600;
+  color: #fff;
+  margin: 0;
+}
+.ct-sub { max-width: 600px; font-size: 16px; line-height: 1.6; color: #b8c2d3; margin: 0; }
+
+/* ---------- layout ---------- */
+.ct-grid { display: grid; grid-template-columns: 1fr 1.25fr; gap: 28px; align-items: stretch; }
+.ct-left { display: flex; flex-direction: column; gap: 14px; }
+.ct-list { display: flex; flex-direction: column; gap: 14px; }
+
+/* ---------- cards ---------- */
+.ct-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: #0a1220;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 16px;
+  padding: 16px 20px;
+  color: #fff;
+  text-decoration: none;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+a.ct-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 196, 0, 0.5);
+  box-shadow: 0 0 20px rgba(255, 196, 0, 0.15);
+}
+.ct-ico {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: rgba(255, 196, 0, 0.1);
+  border: 1px solid rgba(255, 196, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ct-card.is-wa .ct-ico { background: rgba(37, 211, 102, 0.12); border-color: rgba(37, 211, 102, 0.4); }
+.ct-text { min-width: 0; }
+.ct-label { display: block; font-size: 13px; color: #8FA0B8; }
+.ct-value { display: block; font-size: 17px; font-weight: 600; color: #fff; word-break: break-word; }
+.ct-arrow { margin-left: auto; color: #FFC400; font-size: 20px; transition: transform 0.25s ease; }
+a.ct-card:hover .ct-arrow { transform: translateX(5px); }
+
+/* ---------- WhatsApp button ---------- */
+.ct-wa {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: auto;
+  background: #25d366;
+  color: #fff;
+  border-radius: 999px;
+  padding: 18px;
+  font-size: 16px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.ct-wa:hover { background: #1fb457; transform: translateY(-2px); }
+
+/* ---------- map ---------- */
+.ct-map {
+  display: flex;
+  flex-direction: column;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 196, 0, 0.25);
+  background: #0a1220;
+}
+.ct-map .map-frame {
+  position: relative;
+  flex: 1;
+  min-height: 340px;
+  border: 0;
+  border-radius: 0;
+}
+.ct-map .map-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 340px;
+  border: 0;
+  pointer-events: none;   /* click karne par chalega */
+  /* dark map look. Pasand na aaye to ye ek line delete kar do */
+  filter: invert(0.92) hue-rotate(180deg) saturate(0.85) brightness(0.95);
+}
+.ct-map .map-frame.is-active iframe { pointer-events: auto; }
+.ct-maphint {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  background: rgba(10, 18, 32, 0.88);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 12px;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+.map-frame.is-active .ct-maphint { opacity: 0; }
+
+.ct-map-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  background: #0a1220;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.ct-map-bar strong { display: block; font-size: 16px; color: #fff; }
+.ct-map-bar span { font-size: 13px; color: #8FA0B8; }
+.ct-dir {
+  background: #FFC400;
+  color: #000;
+  border-radius: 999px;
+  padding: 11px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s ease;
+}
+.ct-dir:hover { background: #e6b000; }
+
+/* ---------- animation: scroll par ek-ek karke aate hain ---------- */
+#contact.ct-ready .ct-anim { opacity: 0; }
+#contact.ct-in .ct-anim {
+  opacity: 1;
+  animation: ctUp 0.7s ease-out backwards;
+  animation-delay: var(--d, 0s);
+}
+#contact.ct-in .ct-anim.ct-card { animation-name: ctLeft; }
+#contact.ct-in .ct-anim.ct-map  { animation-name: ctRight; }
+#contact.ct-in .ct-anim.ct-wa {
+  animation: ctUp 0.7s ease-out 0.75s backwards, ctPulse 2.8s ease-out 1.8s infinite;
+}
+
+.ct-head { --d: 0s; }
+.ct-list .ct-card:nth-child(1) { --d: 0.15s; }
+.ct-list .ct-card:nth-child(2) { --d: 0.3s; }
+.ct-list .ct-card:nth-child(3) { --d: 0.45s; }
+.ct-list .ct-card:nth-child(4) { --d: 0.6s; }
+.ct-map { --d: 0.3s; }
+
+@keyframes ctUp    { from { opacity: 0; transform: translateY(28px); }  to { opacity: 1; transform: none; } }
+@keyframes ctLeft  { from { opacity: 0; transform: translateX(-36px); } to { opacity: 1; transform: none; } }
+@keyframes ctRight { from { opacity: 0; transform: translateX(40px); }  to { opacity: 1; transform: none; } }
+@keyframes ctPulse {
+  0%        { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.45); }
+  70%, 100% { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #contact .ct-anim { opacity: 1 !important; animation: none !important; }
+}
+
+/* ---------- tablet / mobile ---------- */
+@media (max-width: 900px) {
+  .ct-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  #contact { padding: 48px 14px; }
+  .ct-card { padding: 14px 16px; gap: 14px; }
+  .ct-ico { width: 44px; height: 44px; }
+  .ct-value { font-size: 15.5px; }
+  .ct-map .map-frame,
+  .ct-map .map-frame iframe { min-height: 280px; }
+  .ct-map-bar { flex-direction: column; align-items: stretch; text-align: center; }
+  .ct-dir { text-align: center; }
+}
