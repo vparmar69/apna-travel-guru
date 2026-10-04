@@ -225,23 +225,38 @@
 </section>
      
 <!-- =================== CONTACT =================== -->
-<section class="section section--alt" id="contact">
+<section class="section" id="contact">
   <div class="container">
-    <div class="section-head--center">
-      <span class="eyebrow">Get In Touch</span>
-      <h2 class="section-heading">Plan your trip with us</h2>
-      <p class="section-sub">Message us on WhatsApp for the fastest response, or reach out by phone or email.</p>
+
+    <div class="ct-head ct-anim">
+      <span class="ct-eyebrow">Get In Touch</span>
+      <h2 class="ct-title">Plan your trip with us</h2>
+      <p class="ct-sub">Message us on WhatsApp for the fastest response, or reach out by phone or email.</p>
     </div>
-    <div class="contact-grid">
-      <div>
-        <div class="contact-list" id="contactList">
-          <!-- filled by JS -->
+
+    <div class="ct-grid">
+
+      <!-- Left: contact cards (js/contact.js bharta hai) + WhatsApp button -->
+      <div class="ct-left">
+        <div class="ct-list" id="contactList"></div>
+        <a href="#" class="ct-wa ct-anim" id="contactWhatsapp">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.5 7.3L3 20l1.3-5.3A8.4 8.4 0 1 1 21 11.5z"/></svg>
+          Chat on WhatsApp
+        </a>
+      </div>
+
+      <!-- Right: map + address bar -->
+      <div class="ct-map ct-anim">
+        <div class="map-frame">
+          <iframe id="mapFrame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Office location map"></iframe>
+          <span class="ct-maphint">Click to use map</span>
         </div>
-        <a href="#" class="btn btn--whatsapp btn--full" id="contactWhatsapp">💬 Chat on WhatsApp</a>
+        <div class="ct-map-bar">
+          <div><strong>Indore</strong><span>Madhya Pradesh, India</span></div>
+          <a class="ct-dir" href="https://www.google.com/maps/dir/?api=1&destination=Indore%2C%20Madhya%20Pradesh%2C%20India" target="_blank" rel="noopener">Get Directions</a>
+        </div>
       </div>
-      <div class="map-frame">
-        <iframe id="mapFrame" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Office location map"></iframe>
-      </div>
+
     </div>
   </div>
 </section>
@@ -299,6 +314,7 @@
 <script src="js/data.js"></script>
 <script src="js/main.js"></script>
 <script src="js/about.js"></script>
+<script src="js/contact.js"></script>  
 <script type="module" src="js/reviews.js"></script>
 </body>
 </html>
