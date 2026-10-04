@@ -27,7 +27,7 @@ const SITE_CONFIG = {
   tagline: "Trusted Travel Partner for Spiritual & Cultural Journeys",
 
   // Include country code, no + sign, no spaces. Example shown is a placeholder.
-  whatsappNumber: "7470471789",
+  whatsappNumber: "917470471789",
   callNumber: "+917470471789",
   email: "apnatravelguruu@gmail.com",
 
