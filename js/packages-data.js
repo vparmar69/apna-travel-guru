@@ -36,6 +36,9 @@ const PK_CONFIG = {
   ],
 
   priceNote: "Price includes GST, toll & parking.",
+
+  // "Add meals" option ke saath kya milta hai (popup mein dikhta hai)
+  mealsNote: "Dinner included",
 };
 
 const PK_PACKAGES = [
@@ -158,7 +161,7 @@ const PK_PACKAGES = [
       "Toll, parking & GST",
     ],
     exclusions: [
-      "Food: lunch & dinner (optional meals add-on available)",
+      "Meals (optional add-on available, dinner included)",
       "Train / flight tickets",
       "Personal expenses",
       "Special darshan or entry tickets, if any",
