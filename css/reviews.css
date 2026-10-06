@@ -1262,3 +1262,90 @@ body.pk-lock { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .pk-card.is-pre.pk-in, .pk-pricecard.is-new, .pk-sec-b { animation: none; }
 }
+/* =====================================================================
+   PACKAGES v2 — bada itinerary box, sab kuch ek sath, Book Now button
+   Ye code css/reviews.css ke sabse neeche jodna hai (packages.css ke baad).
+   ===================================================================== */
+
+/* popup width animation */
+.pk-modal { transition: transform 0.3s ease, max-width 0.3s ease; }
+.pk-modal.is-wide { max-width: 1020px; }
+
+/* ---------- Done + Book Now ek line mein ---------- */
+.pk-btnrow { display: flex; gap: 12px; }
+.pk-btnrow .pk-cta { flex: 1.6; width: auto; }
+.pk-btnrow .pk-wa { flex: 1; padding: 17px 10px; font-size: 17px; }
+
+/* ---------- meals ka box ---------- */
+.pk-food {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 8px 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 14.5px; color: #e8edf5; cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+.pk-food:hover { border-color: rgba(255, 196, 0, 0.5); }
+.pk-food em { font-style: normal; color: #b8c2d3; }
+.pk-food small { color: #8FA0B8; font-size: 12.5px; }
+.pk-food-s { padding: 9px 12px; font-size: 13.5px; margin-top: 8px; }
+
+/* ---------- bada itinerary view ---------- */
+.pk-top-r { display: flex; align-items: center; gap: 10px; }
+.pk-share {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px; padding: 10px 18px;
+  color: #fff; font-size: 14px; font-weight: 600; text-decoration: none;
+  transition: border-color 0.2s ease;
+}
+.pk-share:hover { border-color: #FFC400; color: #FFC400; }
+
+.pk-modal .pk-body.pk-two {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 30px;
+  padding-top: 22px;
+  padding-bottom: 24px;
+}
+.pk-h4 {
+  font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+  color: #FFC400; margin: 0 0 14px;
+}
+.pk-main .pk-days { margin: 0; }
+.pk-side { display: flex; flex-direction: column; gap: 16px; }
+.pk-box {
+  background: #070c17;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 18px 20px;
+}
+.pk-box.ok { border-color: rgba(74, 222, 128, 0.28); }
+.pk-box.no { border-color: rgba(248, 113, 113, 0.28); }
+.pk-box .pk-list { gap: 10px; margin: 0; }
+.pk-box .pk-list li { font-size: 14.5px; }
+
+/* niche ki bar: price left, buttons right */
+.pk-foot-row { flex-direction: row; align-items: center; justify-content: space-between; gap: 20px; }
+.pk-sum .pk-big2 { color: #FFC400; }
+.pk-note-l { text-align: left; margin-top: 6px; }
+.pk-btns { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+.pk-call {
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  border-radius: 999px; padding: 15px 30px;
+  color: #fff; font-size: 15px; font-weight: 600; text-decoration: none;
+  transition: border-color 0.2s ease;
+}
+.pk-call:hover { border-color: #FFC400; color: #FFC400; }
+.pk-btns .pk-wa { padding: 16px 38px; font-size: 16px; }
+
+@media (max-width: 800px) {
+  .pk-modal .pk-body.pk-two { grid-template-columns: 1fr; gap: 22px; }
+  .pk-foot-row { flex-direction: column; align-items: stretch; gap: 14px; }
+  .pk-btns { width: 100%; }
+  .pk-btns .pk-call, .pk-btns .pk-wa { flex: 1; text-align: center; padding: 15px 10px; }
+}
+@media (max-width: 480px) {
+  .pk-btnrow { flex-direction: column; }
+  .pk-share { padding: 8px 14px; font-size: 13px; }
+}
