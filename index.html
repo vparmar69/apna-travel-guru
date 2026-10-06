@@ -110,17 +110,19 @@
   </div>
 </section>
 <!-- =================== PACKAGES =================== -->
-<section class="section section--alt" id="packages">
+<section class="section" id="packages">
   <div class="container">
-    <div class="section-head--center">
-    
+
+    <!-- Filter chips (js/packages.js bharta hai) -->
+    <div class="pk-filters" id="pkFilters"></div>
+
+    <!-- 9 package cards (js/packages.js bharta hai) -->
+    <div class="pk-carousel">
+      <div class="pk-grid" id="packageGrid"></div>
     </div>
-    <div class="package-grid" id="packageGrid">
-      <!-- filled by JS -->
-    </div>
+
   </div>
 </section>
-
 <!-- =================== ABOUT =================== -->
 <section class="section" id="about">
   <div class="container">
@@ -313,6 +315,8 @@
 
 <script src="js/data.js"></script>
 <script src="js/main.js"></script>
+<script src="js/packages-data.js"></script>
+<script src="js/packages.js"></script>  
 <script src="js/about.js"></script>
 <script src="js/contact.js"></script>  
 <script type="module" src="js/reviews.js"></script>
