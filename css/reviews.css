@@ -1349,3 +1349,110 @@ body.pk-lock { overflow: hidden; }
   .pk-btnrow { flex-direction: column; }
   .pk-share { padding: 8px 14px; font-size: 13px; }
 }
+/* =====================================================================
+   PACKAGES — MOBILE FIX (boxes chhote aur saaf)
+   Ye code css/reviews.css ke sabse neeche jodna hai (packages-v2.css ke baad).
+   ===================================================================== */
+
+@media (max-width: 600px) {
+
+  /* ---------- filter chips: ek line mein, side scroll ---------- */
+  .pk-filters {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    gap: 8px;
+    margin-bottom: 18px;
+    padding: 0 8px 4px;
+    scrollbar-width: none;
+  }
+  .pk-filters::-webkit-scrollbar { display: none; }
+  .pk-chip { padding: 8px 15px; font-size: 13px; white-space: nowrap; flex-shrink: 0; }
+
+  /* ---------- package cards ---------- */
+  .pk-grid .pk-card { border-radius: 16px; }
+  .pk-media { height: 160px; }
+  .pk-tag, .pk-pop { top: 10px; padding: 4px 10px; font-size: 11px; }
+  .pk-tag { left: 10px; }
+  .pk-pop { right: 10px; }
+  .pk-card > .pk-body { padding: 14px 16px 16px; gap: 6px; }
+  .pk-grid .pk-name { font-size: 19px; }
+  .pk-loc { font-size: 13px; }
+  .pk-foot { margin-top: 2px; padding-top: 11px; }
+  .pk-from { font-size: 11px; }
+  .pk-price { font-size: 18px; }
+  .pk-soon { font-size: 14px; }
+  .pk-go { width: 36px; height: 36px; font-size: 17px; }
+  .pk-arrow { height: 48px; font-size: 38px; }
+  .pk-dots { margin-top: 14px; }
+
+  /* ---------- popup: chhota aur compact ---------- */
+  .pk-modal { max-height: 92vh; }
+  .pk-head { padding: 16px 16px 0; }
+  .pk-modal .pk-title { font-size: 22px; }
+  .pk-sub { font-size: 13px; margin-top: 3px; }
+  .pk-x { width: 38px; height: 38px; font-size: 15px; }
+  .pk-prog { margin: 12px 0 4px; gap: 10px; }
+  .pk-seg { height: 4px; }
+  .pk-step { font-size: 11.5px; }
+  .pk-modal .pk-body { padding: 0 16px; }
+
+  .pk-sec { padding: 11px 0; }
+  .pk-sec-h { gap: 10px; }
+  .pk-num { width: 26px; height: 26px; font-size: 12.5px; }
+  .pk-sec-t { font-size: 14.5px; }
+  .pk-val { font-size: 13.5px; }
+  .pk-chg, .pk-sel { font-size: 12px; }
+  .pk-sec-b { padding: 12px 0 2px; }
+
+  .pk-tiers { gap: 8px; }
+  .pk-tier { padding: 11px 13px; gap: 11px; }
+  .pk-tier-t b { font-size: 17px; }
+  .pk-tier-t small { font-size: 12px; }
+  .pk-mems { gap: 8px; }
+  .pk-mem { width: 38px; height: 38px; font-size: 14.5px; border-radius: 10px; }
+  .pk-plans { gap: 8px; }
+  .pk-plan { padding: 11px 6px; font-size: 13.5px; }
+
+  /* niche ki bar */
+  .pk-foot-bar { padding: 12px 16px 14px; gap: 9px; }
+  .pk-hint { font-size: 12.5px; }
+  .pk-pricecard { padding: 11px 14px; border-radius: 13px; }
+  .pk-big { font-size: 24px; }
+  .pk-tot { font-size: 18px; }
+  .pk-l { font-size: 12px; }
+  .pk-food { padding: 9px 11px; font-size: 13px; gap: 4px 8px; }
+  .pk-note { font-size: 11.5px; }
+  .pk-cta { padding: 14px; font-size: 15px; }
+  .pk-btnrow { flex-direction: row; gap: 8px; }
+  .pk-btnrow .pk-cta { flex: 1.5; padding: 14px 6px; font-size: 14px; }
+  .pk-btnrow .pk-wa { flex: 1; padding: 14px 6px; font-size: 14px; }
+
+  /* ---------- itinerary wala bada box ---------- */
+  .pk-back { font-size: 14px; padding: 6px 0; }
+  .pk-top-r { gap: 8px; }
+  .pk-share { padding: 7px 12px; font-size: 12.5px; }
+  .pk-sub2 { margin-top: 8px; }
+  .pk-modal .pk-title2 { font-size: 22px; }
+  .pk-pills { margin: 10px 0 4px; gap: 8px; }
+  .pk-pills span { padding: 5px 12px; font-size: 12px; }
+  .pk-modal .pk-body.pk-two { gap: 16px; padding-top: 14px; padding-bottom: 16px; }
+  .pk-h4 { font-size: 12px; margin-bottom: 10px; }
+  .pk-day { gap: 12px; }
+  .pk-day-h { font-size: 14.5px; }
+  .pk-day-c { padding-bottom: 16px; }
+  .pk-day-c p { font-size: 13.5px; line-height: 1.6; margin-top: 6px; }
+  .pk-side { gap: 12px; }
+  .pk-box { padding: 14px 15px; border-radius: 13px; }
+  .pk-box .pk-list { gap: 8px; }
+  .pk-box .pk-list li { font-size: 13.5px; padding-left: 24px; }
+
+  .pk-foot-row { gap: 10px; }
+  .pk-big2 { font-size: 22px; }
+  .pk-sum .pk-l { font-size: 12px; }
+  .pk-food-s { padding: 7px 10px; font-size: 12.5px; margin-top: 6px; }
+  .pk-note-l { display: none; }
+  .pk-btns { gap: 8px; }
+  .pk-btns .pk-call, .pk-btns .pk-wa { padding: 13px 8px; font-size: 14.5px; }
+  .pk-soon-b p { font-size: 14.5px; margin: 16px 0; }
+}
