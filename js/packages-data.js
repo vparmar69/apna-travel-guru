@@ -37,8 +37,9 @@ const PK_CONFIG = {
 
   priceNote: "Price includes GST, toll & parking.",
 
-  // "Add meals" option ke saath kya milta hai (popup mein dikhta hai)
-  mealsNote: "Dinner included",
+  // "Add meals" option ke saath kya milta hai (popup mein dikhta hai).
+  // Add meals nahi chuna to na breakfast, na dinner (price mein shamil nahi).
+  mealsNote: "Breakfast & dinner included",
 };
 
 const PK_PACKAGES = [
@@ -156,12 +157,11 @@ const PK_PACKAGES = [
     // SAMPLE (aapne ye abhi nahi diya): confirm karke badal do
     inclusions: [
       "Hotel stay as per selected category",
-      "Daily breakfast",
       "Local sightseeing as per itinerary",
       "Toll, parking & GST",
     ],
     exclusions: [
-      "Meals (optional add-on available, dinner included)",
+      "Meals: breakfast & dinner (optional add-on available)",
       "Train / flight tickets",
       "Personal expenses",
       "Special darshan or entry tickets, if any",
