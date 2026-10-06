@@ -32,7 +32,7 @@ const SITE_CONFIG = {
   email: "apnatravelguruu@gmail.com",
 
   // Pre-filled message sent when someone taps a WhatsApp button
-  whatsappDefaultMessage: "Hi Apna Travel Guru! I'd like to know more about your tour packagess.",
+  whatsappDefaultMessage: "Hi Apna Travel Guru! I'd like to know more about your tour packages.",
 
   officeHours: "Mon – Sun: 9:00 AM – 8:00 PM",
   officeAddress: "Indore, Madhya Pradesh, India",
@@ -42,7 +42,7 @@ const SITE_CONFIG = {
 
   social: {
     youtube: "https://youtube.com/shorts/q2qS5BPUbWg?si=66SEy-YX2Z_bZCYe",
-    instagram: "https://youtube.com/shorts/q2qS5BPUbWg?si=66SEy-YX2Z_bZCYe",
+    instagram: "https://www.instagram.com/apnatravelguru/?hl=en",
     facebook: "https://facebook.com/apnatravelguru",
   },
 
