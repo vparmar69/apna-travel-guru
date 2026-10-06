@@ -137,9 +137,10 @@
           '<div><div class="pk-l">Per person</div><div class="pk-big">' + money(pp) + "</div></div>" +
           '<div class="pk-r"><div class="pk-l">Total for ' + S.members + " members</div><div class=\"pk-tot\">" + money(pp * S.members) + "</div></div>" +
         "</div>" +
-        (add ? '<label class="pk-food"><input type="checkbox" data-food' + (S.food ? " checked" : "") + '> Add meals <b>+' + money(add) + "</b> per person</label>" : "") +
+        (add ? '<label class="pk-food"><input type="checkbox" data-food' + (S.food ? " checked" : "") + '> <span>Add meals <em>· ' + esc(CFG.mealsNote) + '</em></span> <b>+' + money(add) + '</b> <small>per person</small></label>' : "") +
         '<div class="pk-note">' + esc(CFG.priceNote) + "</div>" +
-        '<button type="button" class="pk-cta" data-act="view">Done · View Itinerary →</button>';
+        '<div class="pk-btnrow"><button type="button" class="pk-cta" data-act="view">Done · View Itinerary →</button>' +
+        '<a class="pk-wa pk-wa-solid" target="_blank" rel="noopener" href="' + esc(waLink(waMessage())) + '">Book Now</a></div>';
     }
 
     return (
@@ -156,28 +157,20 @@
     );
   }
 
-  function tabContent(plan) {
-    if (S.tab === "itinerary") {
-      return '<div class="pk-days">' + plan.itinerary.map((d) =>
-        '<div class="pk-day"><div class="pk-rail"><span class="pk-dot2"></span><span class="pk-line"></span></div>' +
-        '<div class="pk-day-c"><div class="pk-day-h">' + esc(d.day) + " <span>" + esc(d.title) + "</span></div>" +
-        String(d.text).split(/\n\s*\n/).map((x) => "<p>" + esc(x.trim()) + "</p>").join("") + "</div></div>"
-      ).join("") + "</div>";
-    }
-    let items = [];
-    let cls = "dot";
-    if (S.tab === "inclusions") {
-      items = (S.p.inclusions || []).slice();
-      if (S.food && foodAdd(plan, S.tier)) items.push("Meals (food add-on selected)");
-      cls = "ok";
-    } else if (S.tab === "exclusions") {
-      items = (S.p.exclusions || []).filter((x) => !(S.food && foodAdd(plan, S.tier) && /^food/i.test(x)));
-      cls = "no";
-    } else {
-      items = S.p.carry || [];
-    }
-    if (!items.length) return '<p class="pk-empty">Details will be updated soon.</p>';
-    return '<ul class="pk-list ' + cls + '">' + items.map((x) => "<li>" + esc(x) + "</li>").join("") + "</ul>";
+  function waMessage() {
+    const plan = planOf();
+    const tier = tierOf(S.tier);
+    const pp = perPerson();
+    const add = foodAdd(plan, S.tier);
+    const lines = [
+      'Hi Apna Travel Guru! I\'d like to book the "' + S.p.title + '" package.',
+      "Category: " + tier.label,
+      "Plan: " + plan.label,
+      "Members: " + S.members,
+      "Price: " + money(pp) + " per person (Total " + money(pp * S.members) + ")",
+    ];
+    if (add) lines.push("Meals: " + (S.food ? CFG.mealsNote + " (add-on)" : "Not included"));
+    return lines.join("\n");
   }
 
   function detailsView() {
@@ -186,28 +179,54 @@
     const pp = perPerson();
     const total = pp * S.members;
     const add = foodAdd(plan, S.tier);
-    const msg = [
-      'Hi Apna Travel Guru! I\'d like to book the "' + S.p.title + '" package.',
-      "Category: " + tier.label,
-      "Plan: " + plan.label,
-      "Members: " + S.members,
-      "Price: " + money(pp) + " per person (Total " + money(total) + ")",
-    ];
-    if (add) msg.push("Meals: " + (S.food ? "Included (add-on)" : "Not included"));
-    const tabs = [["itinerary", "Itinerary"], ["inclusions", "Inclusions"], ["exclusions", "Exclusions"], ["carry", "Carry"]]
-      .map((t) => '<button type="button" class="pk-tab' + (S.tab === t[0] ? " is-on" : "") + '" data-tab="' + t[0] + '">' + t[1] + "</button>").join("");
+    const withMeals = S.food && add;
+
+    const inc = (S.p.inclusions || []).slice();
+    if (withMeals) inc.push("Meals add-on: " + CFG.mealsNote);
+    const exc = (S.p.exclusions || []).filter((x) => !(withMeals && /^(food|meals)/i.test(x)));
+    const list = (items, cls) =>
+      items.length
+        ? '<ul class="pk-list ' + cls + '">' + items.map((x) => "<li>" + esc(x) + "</li>").join("") + "</ul>"
+        : '<p class="pk-empty">Details will be updated soon.</p>';
+
+    const days = plan.itinerary.map((d) =>
+      '<div class="pk-day"><div class="pk-rail"><span class="pk-dot2"></span><span class="pk-line"></span></div>' +
+      '<div class="pk-day-c"><div class="pk-day-h">' + esc(d.day) + " <span>" + esc(d.title) + "</span></div>" +
+      String(d.text).split(/\n\s*\n/).map((x) => "<p>" + esc(x.trim()) + "</p>").join("") + "</div></div>"
+    ).join("");
+
+    const page = typeof location !== "undefined" ? location.href.split("#")[0] : "";
+    const shareMsg = "Apna Travel Guru: " + S.p.title + ", " + plan.label + " (" + tier.label + ", " + S.members + " members) - " +
+      money(pp) + " per person, total " + money(total) + ". " + page;
+    const shareHref = "https://wa.me/?text=" + encodeURIComponent(shareMsg);
+    const callNum = String(site.callNumber || site.whatsappNumber || "").replace(/\D/g, "");
 
     return (
       '<div class="pk-head">' +
-        '<div class="pk-top"><button type="button" class="pk-back" data-act="back">← Change selection</button>' + closeBtn + "</div>" +
+        '<div class="pk-top"><button type="button" class="pk-back" data-act="back">← Change selection</button>' +
+          '<div class="pk-top-r"><a class="pk-share" target="_blank" rel="noopener" href="' + esc(shareHref) + '">Share</a>' + closeBtn + "</div></div>" +
         '<div class="pk-sub pk-sub2">' + esc(S.p.title) + '</div><h2 class="pk-title pk-title2">' + esc(plan.label) + "</h2>" +
-        '<div class="pk-pills"><span>' + esc(tier.label) + "</span><span>" + S.members + " members</span>" + (S.food && add ? "<span>With meals</span>" : "") + "</div>" +
-        '<div class="pk-tabs">' + tabs + "</div>" +
+        '<div class="pk-pills"><span>' + esc(tier.label) + "</span><span>" + S.members + " members</span>" + (withMeals ? "<span>With meals</span>" : "") + "</div>" +
       "</div>" +
-      '<div class="pk-body">' + tabContent(plan) + "</div>" +
+      '<div class="pk-body pk-two">' +
+        '<section class="pk-main"><h4 class="pk-h4">Itinerary</h4><div class="pk-days">' + days + "</div></section>" +
+        '<aside class="pk-side">' +
+          '<div class="pk-box ok"><h4 class="pk-h4">Included</h4>' + list(inc, "ok") + "</div>" +
+          '<div class="pk-box no"><h4 class="pk-h4">Not included</h4>' + list(exc, "no") + "</div>" +
+          '<div class="pk-box"><h4 class="pk-h4">Things to carry</h4>' + list(S.p.carry || [], "dot") + "</div>" +
+        "</aside>" +
+      "</div>" +
       '<div class="pk-foot-bar pk-foot-row">' +
-        '<div><div class="pk-l">Per person</div><div class="pk-big2">' + money(pp) + '</div><div class="pk-l">Total for ' + S.members + ": " + money(total) + "</div></div>" +
-        '<a class="pk-wa" target="_blank" rel="noopener" href="' + esc(waLink(msg.join("\n"))) + '">Book on WhatsApp</a>' +
+        '<div class="pk-sum">' +
+          '<div class="pk-l">Per person</div><div class="pk-big2">' + money(pp) + "</div>" +
+          '<div class="pk-l">' + money(pp) + " × " + S.members + " members = <b>" + money(total) + "</b></div>" +
+          (add ? '<label class="pk-food pk-food-s"><input type="checkbox" data-food' + (S.food ? " checked" : "") + '> Add meals <em>· ' + esc(CFG.mealsNote) + "</em> <b>+" + money(add) + "</b></label>" : "") +
+          '<div class="pk-note pk-note-l">' + esc(CFG.priceNote) + "</div>" +
+        "</div>" +
+        '<div class="pk-btns">' +
+          (callNum ? '<a class="pk-call" href="tel:+' + callNum + '">Call</a>' : "") +
+          '<a class="pk-wa" target="_blank" rel="noopener" href="' + esc(waLink(waMessage())) + '">Book Now</a>' +
+        "</div>" +
       "</div>"
     );
   }
@@ -225,6 +244,7 @@
     const old = modal.querySelector(".pk-body");
     const top = old ? old.scrollTop : 0;
     modal.innerHTML = S.view === "soon" ? soonView() : S.view === "details" ? detailsView() : selectView();
+    modal.classList.toggle("is-wide", S.view === "details");
     const b = modal.querySelector(".pk-body");
     if (b && S.lastView === S.view) b.scrollTop = top;
     S.lastView = S.view;
