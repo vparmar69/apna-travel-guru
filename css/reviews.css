@@ -1684,3 +1684,86 @@ body.pk-lock { overflow: hidden; }
     to   { opacity: 1; transform: none; }
   }
 }
+
+/* =====================================================================
+   PACKAGES — ITINERARY POPUP (final): saaf, beech mein, blur, professional
+   - Upar ke Itinerary / Included / Carry wale buttons hata diye
+   - Mobile par bhi beech mein tairta hua card (kinare se chipka nahi)
+   - Peeche ka page blur
+   Ye code css/reviews.css ke sabse NEECHE jodna hai (sabse aakhri).
+   ===================================================================== */
+
+.pk-jump { display: none !important; }
+
+/* ---------- saaf header ---------- */
+.pk-head-d { padding-bottom: 14px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); }
+.pk-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #FFC400;
+  margin-bottom: 4px;
+}
+.pk-head-d .pk-title2 { margin: 0; }
+.pk-pills-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 14px; }
+.pk-pills-row .pk-pills { margin: 0; }
+.pk-pills-row .pk-back {
+  padding: 0 0 1px;
+  font-size: 13.5px;
+  font-weight: 500;
+  color: #b8c2d3;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  white-space: nowrap;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+.pk-pills-row .pk-back:hover { color: #FFC400; border-color: #FFC400; }
+
+/* ---------- itinerary: Day ka chhota badge ---------- */
+.pk-day-h { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 16px; font-weight: 600; color: #fff; }
+.pk-daybadge {
+  background: rgba(255, 196, 0, 0.12);
+  border: 1px solid rgba(255, 196, 0, 0.35);
+  color: #FFC400;
+  border-radius: 999px;
+  padding: 3px 11px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- dibbe: halke aur saaf ---------- */
+.pk-box { background: rgba(255, 255, 255, 0.03); }
+.pk-modal.is-wide { box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6); }
+.pk-call { padding: 14px 26px; }
+
+/* ---------- mobile: itinerary bhi beech mein tairta hua card ---------- */
+@media (max-width: 800px) {
+  .pk-modal.is-wide {
+    position: relative;
+    top: auto; left: auto; right: auto; bottom: auto;
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    max-height: calc(100vh - 32px);
+    max-height: calc(100dvh - 32px);
+    border: 1px solid rgba(255, 196, 0, 0.32);
+    border-radius: 22px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.65);
+    animation: pkCenterIn 0.3s ease-out;
+  }
+  @keyframes pkCenterIn {
+    from { opacity: 0; transform: scale(0.94); }
+    to   { opacity: 1; transform: none; }
+  }
+  .pk-modal.is-wide .pk-head { padding: 16px 16px 12px; }
+  .pk-modal.is-wide .pk-body.pk-two { padding: 14px 16px; }
+}
+
+@media (max-width: 600px) {
+  .pk-eyebrow { font-size: 11px; }
+  .pk-pills-row { margin-top: 10px; }
+  .pk-pills-row .pk-back { font-size: 12.5px; }
+  .pk-day-h { font-size: 14px; gap: 8px; }
+  .pk-daybadge { font-size: 11px; padding: 2px 9px; }
+}
