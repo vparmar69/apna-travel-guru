@@ -1603,3 +1603,58 @@ body.pk-lock { overflow: hidden; }
   .pk-food-s { padding: 7px 10px; font-size: 12px; }
   .pk-btns .pk-call, .pk-btns .pk-wa { padding: 12px 14px; font-size: 13.5px; }
 }
+/* =====================================================================
+   PACKAGES — MOBILE v3
+   - Selection popup: kinaaron se chipka NAHI, charo taraf gap ke saath
+     tairta hua card (neeche ke paas se upar aata hai)
+   - Peeche ka page BLUR ho jata hai
+   - Itinerary: poora page (full screen)
+   Ye code css/reviews.css ke sabse NEECHE jodna hai (sabse aakhri).
+   ===================================================================== */
+
+/* ---------- peeche ka blur (computer + mobile) ---------- */
+.pk-overlay {
+  background: rgba(4, 8, 16, 0.42);
+  -webkit-backdrop-filter: blur(10px) saturate(1.1);
+  backdrop-filter: blur(10px) saturate(1.1);
+}
+
+/* ---------- mobile + chhoti screen ---------- */
+@media (max-width: 800px) {
+
+  /* popup ke charo taraf gap: kisi kinare se nahi chipkega */
+  .pk-overlay {
+    align-items: flex-end;
+    justify-content: center;
+    padding: 14px 14px calc(14px + env(safe-area-inset-bottom, 0px));
+  }
+  .pk-modal:not(.is-wide) {
+    width: 100%;
+    max-width: 520px;
+    max-height: calc(100vh - 28px);
+    max-height: calc(100dvh - 28px);
+    border: 1px solid rgba(255, 196, 0, 0.32);
+    border-radius: 22px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.65);
+  }
+  /* neeche wali patli "sheet" line hata di, ab ye tairta hua card hai */
+  .pk-modal:not(.is-wide)::before { display: none; }
+
+  /* khulte waqt halka sa upar aata hai */
+  .pk-overlay.is-open .pk-modal:not(.is-wide) { animation: pkFloat 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); }
+  @keyframes pkFloat {
+    from { opacity: 0; transform: translateY(50px) scale(0.97); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  /* itinerary: poora page, padding ke bina */
+  .pk-modal.is-wide {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: auto; height: auto;
+    max-width: none; max-height: none;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
