@@ -1658,3 +1658,29 @@ body.pk-lock { overflow: hidden; }
     box-shadow: none;
   }
 }
+
+/* =====================================================================
+   PACKAGES — MOBILE v4: popup bilkul BEECH (center) mein
+   Charo taraf barabar gap, kinare se chipka nahi, peeche blur.
+   Ye code css/reviews.css ke sabse NEECHE jodna hai (sabse aakhri).
+   ===================================================================== */
+
+@media (max-width: 800px) {
+  .pk-overlay {
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+
+  .pk-modal:not(.is-wide) {
+    max-height: calc(100vh - 32px);
+    max-height: calc(100dvh - 32px);
+  }
+
+  /* beech mein halka zoom-in ke saath khulta hai */
+  .pk-overlay.is-open .pk-modal:not(.is-wide) { animation: pkCenter 0.3s ease-out; }
+  @keyframes pkCenter {
+    from { opacity: 0; transform: scale(0.94); }
+    to   { opacity: 1; transform: none; }
+  }
+}
