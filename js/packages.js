@@ -191,28 +191,17 @@
 
     const days = plan.itinerary.map((d) =>
       '<div class="pk-day"><div class="pk-rail"><span class="pk-dot2"></span><span class="pk-line"></span></div>' +
-      '<div class="pk-day-c"><div class="pk-day-h">' + esc(d.day) + " <span>" + esc(d.title) + "</span></div>" +
+      '<div class="pk-day-c"><div class="pk-day-h"><span class="pk-daybadge">' + esc(d.day) + "</span>" + esc(d.title) + "</div>" +
       String(d.text).split(/\n\s*\n/).map((x) => "<p>" + esc(x.trim()) + "</p>").join("") + "</div></div>"
     ).join("");
 
-    const page = typeof location !== "undefined" ? location.href.split("#")[0] : "";
-    const shareMsg = "Apna Travel Guru: " + S.p.title + ", " + plan.label + " (" + tier.label + ", " + S.members + " members) - " +
-      money(pp) + " per person, total " + money(total) + ". " + page;
-    const shareHref = "https://wa.me/?text=" + encodeURIComponent(shareMsg);
     const callNum = String(site.callNumber || site.whatsappNumber || "").replace(/\D/g, "");
 
     return (
-      '<div class="pk-head">' +
-        '<div class="pk-top"><button type="button" class="pk-back" data-act="back">← Change selection</button>' +
-          '<div class="pk-top-r"><a class="pk-share" target="_blank" rel="noopener" href="' + esc(shareHref) + '">Share</a>' + closeBtn + "</div></div>" +
-        '<div class="pk-sub pk-sub2">' + esc(S.p.title) + '</div><h2 class="pk-title pk-title2">' + esc(plan.label) + "</h2>" +
-        '<div class="pk-pills"><span>' + esc(tier.label) + "</span><span>" + S.members + " members</span>" + (withMeals ? "<span>With meals</span>" : "") + "</div>" +
-        '<div class="pk-jump">' +
-          '<button type="button" class="is-on" data-jump="pk-s-itin">Itinerary</button>' +
-          '<button type="button" data-jump="pk-s-inc">Included</button>' +
-          '<button type="button" data-jump="pk-s-exc">Not included</button>' +
-          '<button type="button" data-jump="pk-s-carry">Carry</button>' +
-        "</div>" +
+      '<div class="pk-head pk-head-d">' +
+        '<div class="pk-top"><div><div class="pk-eyebrow">' + esc(S.p.title) + '</div><h2 class="pk-title pk-title2">' + esc(plan.label) + "</h2></div>" + closeBtn + "</div>" +
+        '<div class="pk-pills-row"><div class="pk-pills"><span>' + esc(tier.label) + "</span><span>" + S.members + " members</span>" + (withMeals ? "<span>With meals</span>" : "") + '</div>' +
+          '<button type="button" class="pk-back" data-act="back">← Change</button></div>' +
       "</div>" +
       '<div class="pk-body pk-two">' +
         '<section class="pk-main" id="pk-s-itin"><h4 class="pk-h4">Itinerary</h4><div class="pk-days">' + days + "</div></section>" +
@@ -392,11 +381,6 @@
       if ((el = t.closest("[data-mem]"))) { S.members = Number(el.dataset.mem); S.open = nextOpen(); render(); return; }
       if ((el = t.closest("[data-plan]"))) { S.plan = el.dataset.plan; S.open = nextOpen(); render(); return; }
       if ((el = t.closest("[data-tab]"))) { S.tab = el.dataset.tab; render(); return; }
-      if ((el = t.closest("[data-jump]"))) {
-        const target = modal.querySelector("#" + el.dataset.jump);
-        if (target && target.scrollIntoView) target.scrollIntoView({ behavior: "smooth", block: "start" });
-        return;
-      }
       if ((el = t.closest("[data-act]"))) {
         if (el.dataset.act === "view" && S.tier && S.members && S.plan) { S.view = "details"; S.tab = "itinerary"; render(); }
         else if (el.dataset.act === "back") { S.view = "select"; S.open = 0; render(); }
@@ -405,18 +389,6 @@
     overlay.addEventListener("change", (e) => {
       if (S && e.target.matches("[data-food]")) { S.food = e.target.checked; render(); }
     });
-    // itinerary page par scroll karte waqt upar ka chip apne aap badalta hai
-    overlay.addEventListener("scroll", (e) => {
-      const body = e.target;
-      if (!S || S.view !== "details" || !body.classList || !body.classList.contains("pk-body")) return;
-      const ids = ["pk-s-itin", "pk-s-inc", "pk-s-exc", "pk-s-carry"];
-      let active = ids[0];
-      ids.forEach((id) => {
-        const sec = body.querySelector("#" + id);
-        if (sec && sec.offsetTop - body.offsetTop <= body.scrollTop + 70) active = id;
-      });
-      modal.querySelectorAll("[data-jump]").forEach((b) => b.classList.toggle("is-on", b.dataset.jump === active));
-    }, true);
     document.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && S) closeModal();
     });
