@@ -1908,3 +1908,23 @@ body.menu-lock { overflow: hidden; }
   .ab-arrow { display: none !important; }   /* < > hat gaye */
   .ab-grid { margin: 0 4px; }               /* arrows ki jagah khali thi, ab card poori chaudai le */
 }
+
+/* =====================================================================
+   REVIEWS (mobile): < > arrows hata diye, neeche dots (. . . .) laga diye
+   Ye code css/reviews.css ke sabse NEECHE jodna hai.
+   ===================================================================== */
+
+.rv-dots { display: none; }
+
+@media (max-width: 600px) {
+  .rv-arrow { display: none !important; }     /* < > hat gaye */
+  #reviewList { margin: 0 4px; }              /* arrows ki jagah khali thi, ab card poori chaudai le */
+
+  .rv-dots { display: flex; justify-content: center; gap: 7px; margin-top: 16px; }
+  .rv-dot {
+    width: 8px; height: 8px; padding: 0; border: 0; border-radius: 4px;
+    background: #3a4557; cursor: pointer;
+    transition: width 0.25s ease, background 0.25s ease;
+  }
+  .rv-dot.is-active { width: 22px; background: #FFC400; }
+}
