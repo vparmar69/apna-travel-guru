@@ -246,48 +246,42 @@ if (form && list && submitBtn) {
   updateAuthUI();
 }
 
-/* ===== Mobile swipe arrows < > ===== */
+/* ===== Mobile: swipe + dots (. . . .) neeche ===== */
 (function () {
   const list = document.getElementById("reviewList");
   if (!list) return;
-  const wrap = list.parentElement;
 
-  const prev = document.createElement("button");
-  prev.type = "button";
-  prev.className = "rv-arrow rv-prev";
-  prev.setAttribute("aria-label", "Previous review");
-  prev.textContent = "‹";
+  const dots = document.createElement("div");
+  dots.className = "rv-dots";
+  list.insertAdjacentElement("afterend", dots);
 
-  const next = document.createElement("button");
-  next.type = "button";
-  next.className = "rv-arrow rv-next";
-  next.setAttribute("aria-label", "Next review");
-  next.textContent = "›";
-
-  wrap.appendChild(prev);
-  wrap.appendChild(next);
-
+  const GAP = 14; // CSS ke gap se same
+  const cards = () => Array.from(list.querySelectorAll(".rv-card"));
   const step = () => {
-    const card = list.querySelector(".rv-card");
-    return card ? card.offsetWidth + 14 : list.clientWidth;
+    const c = cards()[0];
+    return c ? c.offsetWidth + GAP : list.clientWidth;
   };
-  prev.addEventListener("click", () => list.scrollBy({ left: -step(), behavior: "smooth" }));
-  next.addEventListener("click", () => list.scrollBy({ left: step(), behavior: "smooth" }));
 
   function update() {
-    const max = list.scrollWidth - list.clientWidth - 2;
-    prev.classList.toggle("is-hidden", list.scrollLeft <= 2);
-    next.classList.toggle("is-hidden", list.scrollLeft >= max);
-
-    // arrows ko card ke bilkul beech (upar-neeche) mein rakho
-    const mid = list.offsetTop + list.offsetHeight / 2;
-    prev.style.top = mid + "px";
-    next.style.top = mid + "px";
+    const idx = Math.round(list.scrollLeft / step());
+    dots.querySelectorAll(".rv-dot").forEach((d, i) => d.classList.toggle("is-active", i === idx));
+  }
+  function build() {
+    const n = cards().length;
+    let h = "";
+    for (let i = 0; i < n; i++) {
+      h += '<button type="button" class="rv-dot" aria-label="Go to review ' + (i + 1) + '" data-i="' + i + '"></button>';
+    }
+    dots.innerHTML = h;
+    update();
   }
 
+  dots.addEventListener("click", (e) => {
+    const b = e.target.closest(".rv-dot");
+    if (b) list.scrollTo({ left: Number(b.dataset.i) * step(), behavior: "smooth" });
+  });
   list.addEventListener("scroll", update, { passive: true });
   window.addEventListener("resize", update);
-  new MutationObserver(update).observe(list, { childList: true });
-  if (window.ResizeObserver) new ResizeObserver(update).observe(list);
-  update();
+  new MutationObserver(build).observe(list, { childList: true }); // naye reviews aane par dots badal jate hain
+  build();
 })();
