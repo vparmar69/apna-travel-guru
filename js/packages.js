@@ -34,6 +34,7 @@
   const isLive = (p) => !!(p.live && p.plans && p.plans.length);
   const tierOf = (id) => CFG.tiers.find((t) => t.id === id);
   const foodAdd = (plan, tier) => (plan.food && plan.food[tier]) || 0;
+  const mealsOf = (plan) => (plan && plan.meals) || CFG.mealsNote;
   const minPrice = (p) => {
     let m = Infinity;
     p.plans.forEach((pl) =>
@@ -137,7 +138,7 @@
           '<div><div class="pk-l">Per person</div><div class="pk-big">' + money(pp) + "</div></div>" +
           '<div class="pk-r"><div class="pk-l">Total for ' + S.members + " members</div><div class=\"pk-tot\">" + money(pp * S.members) + "</div></div>" +
         "</div>" +
-        (add ? '<label class="pk-food"><input type="checkbox" data-food' + (S.food ? " checked" : "") + '> <span>Add meals <em>· ' + esc(CFG.mealsNote) + '</em></span> <b>+' + money(add) + '</b> <small>per person</small></label>' : "") +
+        (add ? '<label class="pk-food"><input type="checkbox" data-food' + (S.food ? " checked" : "") + '> <span>Add meals <em>· ' + esc(mealsOf(plan)) + '</em></span> <b>+' + money(add) + '</b> <small>per person</small></label>' : "") +
         '<div class="pk-note">' + esc(CFG.priceNote) + "</div>" +
         '<div class="pk-btnrow"><button type="button" class="pk-cta" data-act="view">Done · View Itinerary →</button>' +
         '<a class="pk-wa pk-wa-solid" target="_blank" rel="noopener" href="' + esc(waLink(waMessage())) + '">Book Now</a></div>';
@@ -169,7 +170,7 @@
       "Members: " + S.members,
       "Price: " + money(pp) + " per person (Total " + money(pp * S.members) + ")",
     ];
-    if (add) lines.push("Meals: " + (S.food ? CFG.mealsNote + " (add-on)" : "Not included"));
+    if (add) lines.push("Meals: " + (S.food ? mealsOf(plan) + " (add-on)" : "Not included"));
     return lines.join("\n");
   }
 
@@ -181,9 +182,10 @@
     const add = foodAdd(plan, S.tier);
     const withMeals = S.food && add;
 
-    const inc = (S.p.inclusions || []).slice();
-    if (withMeals) inc.push("Meals add-on: " + CFG.mealsNote);
-    const exc = (S.p.exclusions || []).filter((x) => !(withMeals && /^(food|meals)/i.test(x)));
+    const inc = (plan.inclusions || S.p.inclusions || []).slice();
+    if (withMeals) inc.push("Meals add-on: " + mealsOf(plan));
+    const exc = (plan.exclusions || S.p.exclusions || []).filter((x) => !(withMeals && /^(food|meals)/i.test(x)));
+    if (add && !withMeals && plan.meals) exc.push("Meals: " + plan.meals + " (optional add-on)");
     const list = (items, cls) =>
       items.length
         ? '<ul class="pk-list ' + cls + '">' + items.map((x) => "<li>" + esc(x) + "</li>").join("") + "</ul>"
@@ -220,7 +222,7 @@
           (callNum ? '<a class="pk-call" href="tel:+' + callNum + '">Call</a>' : "") +
           '<a class="pk-wa" target="_blank" rel="noopener" href="' + esc(waLink(waMessage())) + '">Book Now</a>' +
         "</div>" +
-        (add ? '<label class="pk-food pk-food-s pk-meals"><input type="checkbox" data-food' + (S.food ? " checked" : "") + '> Add meals <em>· ' + esc(CFG.mealsNote) + "</em> <b>+" + money(add) + "</b></label>" : "") +
+        (add ? '<label class="pk-food pk-food-s pk-meals"><input type="checkbox" data-food' + (S.food ? " checked" : "") + '> Add meals <em>· ' + esc(mealsOf(plan)) + "</em> <b>+" + money(add) + "</b></label>" : "") +
         '<div class="pk-note pk-note-l">' + esc(CFG.priceNote) + "</div>" +
       "</div>"
     );
