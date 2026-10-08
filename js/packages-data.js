@@ -20,6 +20,9 @@
    Rules: "" quotes rakho, har line ke end mein , rakho, { } [ ] mat hatao.
    ===================================================================== */
 
+// Helper: din ka itinerary likhne ke liye. pkDay("Day 1", "Title", "para 1", "para 2", ...)
+const pkDay = (day, title, ...paras) => ({ day: day, title: title, text: paras.join("\n\n") });
+
 const PK_CONFIG = {
   minMembers: 2,
   maxMembers: 12,
@@ -176,10 +179,322 @@ const PK_PACKAGES = [
   },
 
   // ===================================================================
-  // 2 to 9: COMING SOON (data aane par live: true karenge)
+  // 4 to 9: COMING SOON (data aane par live: true karenge)
   // ===================================================================
-  { id: "ujjain-omkareshwar",  title: "Ujjain + Omkareshwar",  location: "Madhya Pradesh",   filter: "Spiritual",  popular: true,  image: "images/packages/ujjain-omkareshwar.jpg",  tone: "#4a2a12", live: false },
-  { id: "kutch",               title: "Kutch (Rann Utsav)",    location: "Gujarat",          filter: "Culture",    popular: true,  image: "images/packages/kutch.jpg",               tone: "#12304d", live: false },
+  // ===================================================================
+  // 2. UJJAIN + OMKARESHWAR  — LIVE
+  // ===================================================================
+  {
+    id: "ujjain-omkareshwar",
+    title: "Ujjain + Omkareshwar",
+    location: "Madhya Pradesh",
+    filter: "Spiritual",
+    popular: true,
+    image: "images/packages/ujjain-omkareshwar.jpg",
+    tone: "#4a2a12",
+    live: true,
+
+    // SAMPLE (aapne ye nahi diya): confirm karke badal do
+    exclusions: [
+      "Train / flight tickets",
+      "Personal expenses",
+      "Entry tickets or special darshan, if any",
+    ],
+    carry: ["ID proof", "Comfortable footwear", "Modest temple attire", "Water bottle", "Personal medicines"],
+
+    plans: [
+      {
+        id: "1n2d",
+        label: "1 Night / 2 Days",
+        meals: "1 Dinner & 2 Breakfasts",
+        price: {
+          deluxe:  [3600, 2600, 2100, 2000, 1800],
+          premium: [4000, 3200, 2400, 2300, 2100],
+          luxury:  [6000, 5000, 4500, 4300, 4100],
+        },
+        food: { deluxe: 350, premium: 450, luxury: 500 },
+        inclusions: ["1 Night hotel stay", "Pickup from Ujjain", "Drop at Ujjain", "Private sightseeing", "Ujjain & Omkareshwar sightseeing", "Toll, parking & GST"],
+        itinerary: [
+          pkDay("Day 1", "Ujjain Arrival & Complete Temple Darshan",
+            "Arrive in Ujjain and begin your spiritual journey with the sacred Mahakaleshwar Jyotirlinga Darshan. Visit Bade Ganeshji Temple, Harsiddhi Mata Temple and explore the magnificent Mahakal Lok Corridor.",
+            "Continue your temple tour with visits to Kal Bhairav Temple, Mangalnath Temple, Gadkalika Temple and Sandipani Ashram. Later, spend some peaceful time at Ram Ghat on the banks of the Shipra River.",
+            "After completing the sightseeing, check in to your hotel and relax.",
+            "Overnight Stay in Ujjain."),
+          pkDay("Day 2", "Omkareshwar Excursion & Departure",
+            "After an early breakfast, proceed for a full-day excursion to Omkareshwar.",
+            "Visit the sacred Omkareshwar Jyotirlinga and Mamleshwar Temple. Explore the beautiful Narmada River Ghats and visit the famous Shani Mandir.",
+            "After completing the sightseeing, return to Ujjain and proceed for your drop/onward journey.",
+            "Tour Ends with divine blessings and beautiful memories."),
+        ],
+      },
+
+      {
+        id: "2n2d",
+        label: "2 Nights / 2 Days",
+        meals: "2 Dinners & 2 Breakfasts",
+        price: {
+          deluxe:  [4100, 3000, 2500, 2300, 2100],
+          premium: [4900, 4200, 3100, 2900, 2700],
+          luxury:  [8200, 6000, 6800, 6500, 6200],
+        },
+        food: { deluxe: 700, premium: 800, luxury: 1000 },
+        inclusions: ["2 Nights hotel stay", "Pickup from Ujjain", "Drop at Ujjain", "Private sightseeing", "Ujjain & Omkareshwar sightseeing", "Toll, parking & GST"],
+        itinerary: [
+          pkDay("Day 1", "Ujjain Temple Tour",
+            "Arrive in Ujjain and start your spiritual journey with Mahakaleshwar Jyotirlinga Darshan. Visit Bade Ganeshji Temple, Harsiddhi Mata Temple and the iconic Mahakal Lok Corridor.",
+            "Continue your sightseeing with Kal Bhairav Temple, Mangalnath Temple, Gadkalika Temple and Sandipani Ashram. Later, visit Ram Ghat and experience the spiritual atmosphere of the Shipra River.",
+            "Check in to the hotel and relax.",
+            "Overnight Stay in Ujjain."),
+          pkDay("Day 2", "Omkareshwar Jyotirlinga Tour & Departure",
+            "After breakfast, proceed to Omkareshwar for a divine temple excursion.",
+            "Visit Omkareshwar Jyotirlinga, Mamleshwar Temple, Narmada River Ghats and Shani Mandir.",
+            "After completing the sightseeing, return to Ujjain and proceed for your drop/onward journey.",
+            "Tour Ends with divine blessings and memorable experiences."),
+        ],
+      },
+
+      {
+        id: "2n3d",
+        label: "2 Nights / 3 Days",
+        meals: "2 Dinners & 3 Breakfasts",
+        price: {
+          deluxe:  [5500, 3900, 3200, 3000, 2700],
+          premium: [6400, 5100, 3800, 2600, 2400],
+          luxury:  [9700, 7000, 8000, 7800, 7500],
+        },
+        food: { deluxe: 800, premium: 950, luxury: 1200 },
+        inclusions: ["2 Nights hotel stay", "Pickup from Ujjain", "Drop at Ujjain", "Private sightseeing", "Ujjain, Omkareshwar & Indore sightseeing", "Toll, parking & GST"],
+        itinerary: [
+          pkDay("Day 1", "Ujjain Spiritual & Temple Tour",
+            "Arrive in Ujjain and begin your journey with the sacred Mahakaleshwar Jyotirlinga Darshan. Visit Bade Ganeshji Temple, Harsiddhi Mata Temple and explore the magnificent Mahakal Lok Corridor.",
+            "Continue to Kal Bhairav Temple, Mangalnath Temple, Gadkalika Temple and Sandipani Ashram. Later, visit Ram Ghat and enjoy the peaceful atmosphere of the Shipra River.",
+            "Check in to your hotel and relax.",
+            "Overnight Stay in Ujjain."),
+          pkDay("Day 2", "Omkareshwar Jyotirlinga & Narmada Darshan",
+            "After breakfast, proceed for a full-day excursion to Omkareshwar.",
+            "Seek blessings at Omkareshwar Jyotirlinga and Mamleshwar Temple. Explore the Narmada River Ghats and visit Shani Mandir.",
+            "After sightseeing, return to Ujjain.",
+            "Overnight Stay in Ujjain."),
+          pkDay("Day 3", "Indore City Tour & Departure",
+            "After breakfast, proceed towards Indore for a city sightseeing tour.",
+            "Visit the famous Khajrana Ganesh Temple, explore the historic Rajwada Palace and visit Lal Bagh Palace. Continue to Annapurna Temple and enjoy local food and shopping at Chappan Dukan.",
+            "Later, visit the Indore Zoo before proceeding for your drop/onward journey.",
+            "Tour Ends with wonderful memories of Ujjain, Omkareshwar & Indore."),
+        ],
+      },
+
+      {
+        id: "3n4d",
+        label: "3 Nights / 4 Days",
+        meals: "3 Dinners & 4 Breakfasts",
+        price: {
+          deluxe:  [7300, 5400, 4500, 4200, 3900],
+          premium: [8500, 7300, 5400, 5100, 4900],
+          luxury:  [13000, 9000, 11300, 11000, 10500],
+        },
+        food: { deluxe: 1000, premium: 1200, luxury: 1500 },
+        inclusions: ["3 Nights hotel stay", "Pickup from Ujjain", "Drop at Ujjain", "Private sightseeing", "Ujjain, Omkareshwar, Maheshwar & Indore sightseeing", "Toll, parking & GST"],
+        itinerary: [
+          pkDay("Day 1", "Ujjain Temple & Spiritual Tour",
+            "Arrive in Ujjain and begin your spiritual journey with Mahakaleshwar Jyotirlinga Darshan. Visit Bade Ganeshji Temple, Harsiddhi Mata Temple and explore the grand Mahakal Lok Corridor.",
+            "Continue to Kal Bhairav Temple, Mangalnath Temple, Gadkalika Temple and Sandipani Ashram. Later, visit Ram Ghat on the banks of the Shipra River.",
+            "Check in to the hotel and relax.",
+            "Overnight Stay in Ujjain."),
+          pkDay("Day 2", "Omkareshwar Jyotirlinga Tour",
+            "After breakfast, proceed to Omkareshwar for a full-day spiritual excursion.",
+            "Visit Omkareshwar Jyotirlinga, Mamleshwar Temple, Narmada River Ghats and Shani Mandir.",
+            "Return to Ujjain after completing the sightseeing.",
+            "Overnight Stay in Ujjain."),
+          pkDay("Day 3", "Maheshwar Heritage & Narmada Tour",
+            "After breakfast, proceed towards the historic town of Maheshwar.",
+            "Explore the magnificent Maheshwar Fort, visit Ahilyabai Fort & Palace and spend time at the beautiful Narmada Ghats. Later, visit the scenic Sahastradhara.",
+            "After sightseeing, return to Ujjain.",
+            "Overnight Stay in Ujjain."),
+          pkDay("Day 4", "Indore Sightseeing & Departure",
+            "After breakfast, proceed towards Indore.",
+            "Visit Khajrana Ganesh Temple, Rajwada Palace, Lal Bagh Palace and Annapurna Temple. Enjoy local food and shopping at Chappan Dukan and visit Indore Zoo.",
+            "After completing the sightseeing, proceed for your drop/onward journey.",
+            "Tour Ends with beautiful memories and divine blessings."),
+        ],
+      },
+
+      {
+        id: "4n5d",
+        label: "4 Nights / 5 Days",
+        meals: "4 Dinners & 5 Breakfasts",
+        price: {
+          deluxe:  [9300, 6600, 5600, 5300, 4900],
+          premium: [10900, 9200, 6800, 6500, 6200],
+          luxury:  [17000, 12500, 14500, 14200, 13500],
+        },
+        food: { deluxe: 1300, premium: 1600, luxury: 2000 },
+        inclusions: ["4 Nights hotel stay", "Pickup from Ujjain", "Drop at Ujjain", "Private sightseeing", "Ujjain, Omkareshwar, Maheshwar, Indore & Nalkheda sightseeing", "Toll, parking & GST"],
+        itinerary: [
+          pkDay("Day 1", "Ujjain Temple Darshan",
+            "Arrive in Ujjain and begin your spiritual journey with Mahakaleshwar Jyotirlinga Darshan. Visit Bade Ganeshji Temple, Harsiddhi Mata Temple and explore Mahakal Lok Corridor.",
+            "Continue your temple tour with Kal Bhairav Temple, Mangalnath Temple, Gadkalika Temple and Sandipani Ashram. Later, visit Ram Ghat and experience the spiritual charm of the Shipra River.",
+            "Check in to the hotel and relax.",
+            "Overnight Stay in Ujjain."),
+          pkDay("Day 2", "Omkareshwar Jyotirlinga & Narmada Darshan",
+            "After breakfast, proceed for an excursion to Omkareshwar.",
+            "Visit Omkareshwar Jyotirlinga, Mamleshwar Temple, Narmada River Ghats and Shani Mandir.",
+            "Return to Ujjain after completing the sightseeing.",
+            "Overnight Stay in Ujjain."),
+          pkDay("Day 3", "Maheshwar Heritage Tour",
+            "After breakfast, proceed towards Maheshwar.",
+            "Explore the historic Maheshwar Fort, Ahilyabai Fort & Palace and the beautiful Narmada Ghats. Later, visit the scenic Sahastradhara.",
+            "Return to Ujjain after sightseeing.",
+            "Overnight Stay in Ujjain."),
+          pkDay("Day 4", "Indore City Sightseeing",
+            "After breakfast, proceed towards Indore.",
+            "Visit Khajrana Ganesh Temple, Rajwada Palace, Lal Bagh Palace and Annapurna Temple. Enjoy shopping and local delicacies at Chappan Dukan and visit Indore Zoo.",
+            "Return to Ujjain after completing the sightseeing.",
+            "Overnight Stay in Ujjain."),
+          pkDay("Day 5", "Nalkheda Baglamukhi Temple & Departure",
+            "After breakfast, proceed towards Nalkheda for a spiritual visit to the famous Maa Baglamukhi Temple.",
+            "Spend time seeking blessings at the temple before beginning your return journey.",
+            "After completing the visit, proceed for your drop/onward journey.",
+            "Tour Ends with divine blessings and unforgettable memories."),
+        ],
+      },
+    ],
+  },
+  // ===================================================================
+  // 3. KUTCH (RANN UTSAV)  — LIVE
+  // ===================================================================
+  {
+    id: "kutch",
+    title: "Kutch (Rann Utsav)",
+    location: "Gujarat",
+    filter: "Culture",
+    popular: true,
+    image: "images/packages/kutch.jpg",
+    tone: "#12304d",
+    live: true,
+
+    // Dhordo (White Rann) ka khana package mein shamil hai.
+    // Bhuj ke din ka khana "Add meals" option se (extra) milta hai.
+    inclusions: [
+      "Accommodation on twin sharing basis",
+      "Dinner & breakfast at Dhordo (White Rann) resort",
+      "Private AC vehicle (Sedan / SUV / Tempo Traveller as per group size)",
+      "All hotel taxes included",
+    ],
+    exclusions: [
+      "White Desert entry permit / direct applicable fees",
+      "Monument, museum, guide & activity entry tickets",
+      "Rail / flight / bus tickets & travel insurance",
+      "Personal expenses (laundry, tips, extra meals, etc.)",
+    ],
+    // SAMPLE (aapne ye nahi diya): confirm karke badal do
+    carry: ["ID proof", "Warm clothing for the evenings", "Comfortable footwear", "Sunscreen & sunglasses", "Personal medicines"],
+
+    plans: [
+      {
+        id: "1n2d",
+        label: "1 Night / 2 Days",
+        price: {
+          deluxe:  [6400, 5000, 4500, 4250, 4000],
+          premium: [8500, 6500, 6400, 6000, 5500],
+          luxury:  [10000, 8000, 7500, 7200, 6500],
+        },
+        itinerary: [
+          pkDay("Day 1", "White Rann & Dhordo (Dinner)",
+            "Arrival & Transfer: Pick-up from Bhuj Railway Station / Airport and drive to White Rann, Dhordo.",
+            "Check-in: Check-in at resort / traditional Bhunga or tent accommodation near White Rann.",
+            "Evening: Visit White Rann to enjoy the amazing sunset view.",
+            "Activities (Direct Payment): Camel Ride, Camel Cart Ride, Horse Ride, Motor Paragliding, ATV Bike Ride.",
+            "Night: Enjoy Cultural & Musical Folk Programme at the resort. Overnight stay near White Rann – Dhordo."),
+          pkDay("Day 2", "Kala Dungar & Bhuj (Breakfast)",
+            "Morning: Breakfast and check-out from resort.",
+            "Sightseeing: Visit Kala Dungar (Black Hill).",
+            "Bhuj Return: Visit Bhuj Rakshak Van, Aina Mahal, Prag Mahal, Swaminarayan Temple, and Smritivan Memorial.",
+            "Departure: Drop at Bhuj Railway Station / Airport. Tour ends with sweet memories."),
+        ],
+      },
+
+      {
+        id: "2n3d",
+        label: "2 Nights / 3 Days",
+        meals: "Bhuj meals (1 day)",
+        price: {
+          deluxe:  [9000, 7300, 6600, 5900, 5600],
+          premium: [12000, 9500, 9500, 9100, 8500],
+          luxury:  [14800, 11900, 12500, 10500, 9500],
+        },
+        food: { deluxe: 300, premium: 400, luxury: 500 },
+        itinerary: [
+          pkDay("Day 1", "White Rann & Dhordo (Dinner)",
+            "Pick-up from Bhuj & transfer to Dhordo.",
+            "Check-in at resort and relax.",
+            "Evening visit to White Rann for sunset & activities.",
+            "Enjoy Cultural Program & overnight stay near Rann."),
+          pkDay("Day 2", "Kala Dungar & Bhuj City (Breakfast + Dinner)",
+            "Breakfast & check-out. Visit Kala Dungar (Black Hill).",
+            "Drive to Bhuj: Aina Mahal, Prag Mahal, Kutch Museum, Swaminarayan Temple & Bhujodi Village (Hira Laxmi Park & Vande Mataram Memorial).",
+            "Overnight stay at Bhuj hotel."),
+          pkDay("Day 3", "Mandvi Beach & Departure (Breakfast)",
+            "Breakfast & check-out.",
+            "Mandvi Visit: Mandvi Beach, Vijay Vilas Palace, 72 Jinalaya & Shyamji Krishna Varma Memorial.",
+            "Drop at Bhuj Railway Station / Airport / Bus Stop."),
+        ],
+      },
+
+      {
+        id: "3n4d",
+        label: "3 Nights / 4 Days",
+        meals: "Bhuj meals (2 days)",
+        price: {
+          deluxe:  [12000, 9700, 9500, 8800, 8400],
+          premium: [15500, 13800, 13500, 12400, 11900],
+          luxury:  [19600, 15900, 16600, 14800, 14000],
+        },
+        food: { deluxe: 600, premium: 800, luxury: 1000 },
+        itinerary: [
+          pkDay("Day 1", "White Rann & Dhordo (Dinner)",
+            "Pick-up from Bhuj & transfer to Dhordo.",
+            "Evening White Rann sunset visit, handicraft market & Cultural Show.",
+            "Overnight stay near White Rann."),
+          pkDay("Day 2", "Road to Heaven & Dholavira (Breakfast + Dinner)",
+            "Visit Kala Dungar Dattatreya Temple.",
+            "Drive through scenic Road To Heaven to reach Dholavira (UNESCO World Heritage Site & Museum).",
+            "Return to Bhuj for overnight stay."),
+          pkDay("Day 3", "Bhuj City Sightseeing (Breakfast + Dinner)",
+            "Full day Bhuj: Smritivan, Aina Mahal, Prag Mahal, Kutch Museum, Swaminarayan Temple & Bhujodi Village.",
+            "Local Kutch handicraft shopping. Overnight stay at Bhuj."),
+          pkDay("Day 4", "Mandvi & Departure (Breakfast)",
+            "Excursion to Mandvi: Vijay Vilas Palace, Shyamji Krishna Varma Memorial, 72 Jinalaya & Mandvi Beach.",
+            "Drop at Bhuj Railway Station / Airport."),
+        ],
+      },
+
+      {
+        id: "4n5d",
+        label: "4 Nights / 5 Days",
+        meals: "Bhuj meals (3 days)",
+        price: {
+          deluxe:  [15500, 12000, 10500, 9750, 9400],
+          premium: [19200, 16000, 16600, 15300, 14900],
+          luxury:  [24500, 19900, 21900, 18800, 17500],
+        },
+        food: { deluxe: 900, premium: 1200, luxury: 1500 },
+        itinerary: [
+          pkDay("Day 1", "White Rann & Dhordo (Dinner)",
+            "Pick-up from Bhuj, transfer to Dhordo, evening White Rann sunset & Cultural Show. Overnight stay at Rann."),
+          pkDay("Day 2", "Kala Dungar & Dholavira (Breakfast + Dinner)",
+            "Visit Kala Dungar, drive on Road to Heaven & explore Dholavira Site & Museum. Return to Bhuj for overnight stay."),
+          pkDay("Day 3", "Bhuj City Sightseeing (Breakfast + Dinner)",
+            "Visit Smritivan, Science Center, Aina Mahal, Prag Mahal, Kutch Museum & Bhujodi Village. Overnight stay at Bhuj."),
+          pkDay("Day 4", "Western Kutch to Mandvi (Breakfast + Dinner)",
+            "Visit Koteshwar Temple, Mata No Madh, Narayan Sarovar & Umiya Dham Vandhay.",
+            "Drive to Mandvi for overnight stay."),
+          pkDay("Day 5", "Mandvi Sightseeing & Departure (Breakfast)",
+            "Visit 72 Jinalaya, Mandvi Beach, Vijay Vilas Palace & Shyamji Krishna Varma Library.",
+            "Drop at Bhuj Railway Station / Airport."),
+        ],
+      },
+    ],
+  },
   { id: "mathura-vrindavan",   title: "Mathura + Vrindavan",   location: "Uttar Pradesh",    filter: "Spiritual",  popular: false, image: "images/packages/mathura-vrindavan.jpg",   tone: "#3b2a14", live: false },
   { id: "char-dham",           title: "Char Dham",             location: "Uttarakhand",      filter: "Pilgrimage", popular: false, image: "images/packages/char-dham.jpg",           tone: "#1f3b2d", live: false },
   { id: "kedarnath-badrinath", title: "Kedarnath + Badrinath", location: "Uttarakhand",      filter: "Pilgrimage", popular: true,  image: "images/packages/kedarnath-badrinath.jpg", tone: "#26334d", live: false },
