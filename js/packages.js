@@ -191,6 +191,7 @@
         ? '<ul class="pk-list ' + cls + '">' + items.map((x) => "<li>" + esc(x) + "</li>").join("") + "</ul>"
         : '<p class="pk-empty">Details will be updated soon.</p>';
 
+    const notes = plan.notes || S.p.notes || [];
     const days = plan.itinerary.map((d) =>
       '<div class="pk-day"><div class="pk-rail"><span class="pk-dot2"></span><span class="pk-line"></span></div>' +
       '<div class="pk-day-c"><div class="pk-day-h"><span class="pk-daybadge">' + esc(d.day) + "</span>" + esc(d.title) + "</div>" +
@@ -211,6 +212,7 @@
           '<div class="pk-box ok" id="pk-s-inc"><h4 class="pk-h4">Included</h4>' + list(inc, "ok") + "</div>" +
           '<div class="pk-box no" id="pk-s-exc"><h4 class="pk-h4">Not included</h4>' + list(exc, "no") + "</div>" +
           '<div class="pk-box" id="pk-s-carry"><h4 class="pk-h4">Things to carry</h4>' + list(S.p.carry || [], "dot") + "</div>" +
+          (notes.length ? '<div class="pk-box"><h4 class="pk-h4">Important notes</h4>' + list(notes, "dot") + "</div>" : "") +
         "</aside>" +
       "</div>" +
       '<div class="pk-foot-bar pk-foot-row">' +
