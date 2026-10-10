@@ -11,15 +11,28 @@
 
 (function () {
   "use strict";
-  if (typeof PK_PACKAGES === "undefined" || typeof PK_CONFIG === "undefined") return;
 
-  const CFG = PK_CONFIG;
-  const PK = PK_PACKAGES;
-  const site = typeof SITE_CONFIG !== "undefined" ? SITE_CONFIG : {};
+  // Data ab page poora load hone ke baad padha jata hai, isliye
+  // index.html mein script lines ka order kuch bhi ho, chalega.
+  let CFG = null;
+  let PK = null;
+  let site = {};
+  let wa = "";
+
+  function setup() {
+    if (typeof PK_PACKAGES === "undefined" || typeof PK_CONFIG === "undefined") {
+      console.error("Packages: js/packages-data.js load nahi hua ya usme galti hai. File check karo.");
+      return false;
+    }
+    CFG = PK_CONFIG;
+    PK = PK_PACKAGES;
+    site = typeof SITE_CONFIG !== "undefined" ? SITE_CONFIG : {};
+    wa = String(site.whatsappNumber || "").replace(/\D/g, "");
+    if (wa.length === 10) wa = "91" + wa;
+    return true;
+  }
 
   // ---------------- helpers ----------------
-  let wa = String(site.whatsappNumber || "").replace(/\D/g, "");
-  if (wa.length === 10) wa = "91" + wa;
   const waLink = (msg) => "https://wa.me/" + wa + "?text=" + encodeURIComponent(msg);
 
   const esc = (s) =>
@@ -311,10 +324,14 @@
 
   // ---------------- init ----------------
   function init() {
+    if (!setup()) return;
     const grid = document.getElementById("packageGrid");
     if (!grid) return;
 
-    grid.innerHTML = PK.map(cardHtml).join("");
+    // ek package mein galti ho to baaki cards phir bhi dikhte hain
+    grid.innerHTML = PK.map((p) => {
+      try { return cardHtml(p); } catch (err) { console.error("Packages: card error for", p && p.id, err); return ""; }
+    }).join("");
 
     // popup shell
     overlay = document.createElement("div");
